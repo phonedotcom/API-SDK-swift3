@@ -777,6 +777,20 @@ class Decoders {
         }
 
 
+        // Decoder for [DeleteMedia]
+        Decoders.addDecoder(clazz: [DeleteMedia].self) { (source: AnyObject) -> [DeleteMedia] in
+            return Decoders.decode(clazz: [DeleteMedia].self, source: source)
+        }
+        // Decoder for DeleteMedia
+        Decoders.addDecoder(clazz: DeleteMedia.self) { (source: AnyObject) -> DeleteMedia in
+            let sourceDictionary = source as! [AnyHashable: Any]
+
+            let instance = DeleteMedia()
+            instance.success = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["success"] as AnyObject?)
+            return instance
+        }
+
+
         // Decoder for [DeleteMenu]
         Decoders.addDecoder(clazz: [DeleteMenu].self) { (source: AnyObject) -> [DeleteMenu] in
             return Decoders.decode(clazz: [DeleteMenu].self, source: source)

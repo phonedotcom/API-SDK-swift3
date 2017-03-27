@@ -15,7 +15,7 @@ open class ListPhoneNumbers: JSONEncodable {
     public var offset: Int32?
     public var limit: Int32?
     /** Array of Contact Phone Number Objects. See below for details. */
-    public var items: [PhoneNumberContact]?
+    public var items: [PhoneNumberFull]?
 
     public init() {}
 

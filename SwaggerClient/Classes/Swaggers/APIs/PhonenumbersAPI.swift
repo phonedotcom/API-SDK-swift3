@@ -199,9 +199,35 @@ open class PhonenumbersAPI: APIBase {
     "id" : "aeiou"
   },
   "items" : [ {
-    "number" : "aeiou",
-    "normalized" : "aeiou",
-    "type" : "aeiou"
+    "call_notifications" : {
+      "emails" : [ "aeiou" ],
+      "sms" : "aeiou"
+    },
+    "route" : {
+      "name" : "aeiou",
+      "id" : 123
+    },
+    "block_anonymous" : true,
+    "caller_id" : {
+      "name" : "aeiou",
+      "type" : "aeiou"
+    },
+    "name" : "aeiou",
+    "phone_number" : "aeiou",
+    "id" : 123,
+    "block_incoming" : true,
+    "sms_forwarding" : {
+      "extension" : {
+        "extension" : 123,
+        "name" : "aeiou",
+        "id" : 123
+      },
+      "application" : {
+        "name" : "aeiou",
+        "id" : 123
+      },
+      "type" : "aeiou"
+    }
   } ]
 }}]
      

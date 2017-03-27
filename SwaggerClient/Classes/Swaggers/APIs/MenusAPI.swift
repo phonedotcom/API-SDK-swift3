@@ -87,7 +87,7 @@ open class MenusAPI: APIBase {
     /**
      Delete an individual menu
      - DELETE /accounts/{accountId}/menus/{menuId}
-     - This service shows the details of an individual menu.
+     - See Account Menus for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -288,7 +288,7 @@ open class MenusAPI: APIBase {
     /**
      Replace an individual menu
      - PUT /accounts/{accountId}/menus/{menuId}
-     - This service replaces the details of an individual Menu.
+     - See Account Menus for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
