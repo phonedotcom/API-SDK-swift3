@@ -286,6 +286,63 @@ open class MediaAPI: APIBase {
      
      - parameter accountId: (path) Account ID 
      - parameter mediaId: (path) Media ID 
+     - parameter json: (form) Media extra parameters (optional)
+     - parameter file: (form) Media file (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func replaceAccountMediaFiles(accountId: Int32, mediaId: Int32, json: String? = nil, file: URL? = nil, completion: @escaping ((_ data: MediaFull?,_ error: Error?) -> Void)) {
+        replaceAccountMediaFilesWithRequestBuilder(accountId: accountId, mediaId: mediaId, json: json, file: file).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Update a media object to your account. Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB.
+     - PUT /accounts/{accountId}/media/files/{mediaId}
+     - See Account Media for more info on the properties.
+     - API Key:
+       - type: apiKey Authorization 
+       - name: apiKey
+     - examples: [{contentType=application/json, example={
+  "name" : "aeiou",
+  "id" : 123,
+  "type" : "aeiou"
+}}]
+     
+     - parameter accountId: (path) Account ID 
+     - parameter mediaId: (path) Media ID 
+     - parameter json: (form) Media extra parameters (optional)
+     - parameter file: (form) Media file (optional)
+
+     - returns: RequestBuilder<MediaFull> 
+     */
+    open class func replaceAccountMediaFilesWithRequestBuilder(accountId: Int32, mediaId: Int32, json: String? = nil, file: URL? = nil) -> RequestBuilder<MediaFull> {
+        var path = "/accounts/{accountId}/media/files/{mediaId}"
+        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{mediaId}", with: "\(mediaId)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let formParams: [String:Any?] = [
+            "json": json,
+            "file": file
+        ]
+
+        let nonNullParameters = APIHelper.rejectNil(formParams)
+        let parameters = APIHelper.convertBoolToString(nonNullParameters)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<MediaFull>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Update a media object to your account. Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB.
+     
+     - parameter accountId: (path) Account ID 
+     - parameter mediaId: (path) Media ID 
      - parameter data: (body) Media data (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -298,7 +355,7 @@ open class MediaAPI: APIBase {
 
     /**
      Update a media object to your account. Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB.
-     - PUT /accounts/{accountId}/media/{mediaId}
+     - PUT /accounts/{accountId}/media/tts/{mediaId}
      - See Account Media for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
@@ -316,7 +373,7 @@ open class MediaAPI: APIBase {
      - returns: RequestBuilder<MediaFull> 
      */
     open class func replaceAccountMediaTtsWithRequestBuilder(accountId: Int32, mediaId: Int32, data: CreateMediaParams? = nil) -> RequestBuilder<MediaFull> {
-        var path = "/accounts/{accountId}/media/{mediaId}"
+        var path = "/accounts/{accountId}/media/tts/{mediaId}"
         path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
         path = path.replacingOccurrences(of: "{mediaId}", with: "\(mediaId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
