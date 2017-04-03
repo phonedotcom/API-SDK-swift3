@@ -550,6 +550,8 @@ class Decoders {
             let sourceDictionary = source as! [AnyHashable: Any]
 
             let instance = CreateExtensionParams()
+            instance.voicemail = Decoders.decodeOptional(clazz: Voicemail.self, source: sourceDictionary["voicemail"] as AnyObject?)
+            instance.callNotifications = Decoders.decodeOptional(clazz: CallNotifications.self, source: sourceDictionary["call_notifications"] as AnyObject?)
             instance.callerId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["caller_id"] as AnyObject?)
             instance.usageType = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["usage_type"] as AnyObject?)
             instance.allowsCallWaiting = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["allows_call_waiting"] as AnyObject?)
@@ -559,20 +561,9 @@ class Decoders {
             instance.fullName = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["full_name"] as AnyObject?)
             instance.timezone = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["timezone"] as AnyObject?)
             instance.nameGreeting = Decoders.decodeOptional(clazz: Any.self, source: sourceDictionary["name_greeting"] as AnyObject?)
-            instance.voicemailGreetingAlternate = Decoders.decodeOptional(clazz: Any.self, source: sourceDictionary["voicemail[greeting][alternate]"] as AnyObject?)
             instance.localAreaCode = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["local_area_code"] as AnyObject?)
-            instance.voicemailGreetingEnableLeaveMessagePrompt = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["voicemail[greeting][enable_leave_message_prompt]"] as AnyObject?)
-            instance.voicemailEnabled = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["voicemail[enabled]"] as AnyObject?)
             instance.enableOutboundCalls = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["enable_outbound_calls"] as AnyObject?)
             instance.enableCallWaiting = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["enable_call_waiting"] as AnyObject?)
-            instance.voicemailPassword = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["voicemail[password]"] as AnyObject?)
-            instance.voicemailGreetingType = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["voicemail[greeting][type]"] as AnyObject?)
-            instance.voicemailGreetingStandard = Decoders.decodeOptional(clazz: Any.self, source: sourceDictionary["voicemail[greeting][standard]"] as AnyObject?)
-            instance.voicemailTranscription = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["voicemail[transcription]"] as AnyObject?)
-            instance.voicemailNotificationsEmails = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["voicemail[notifications][emails]"] as AnyObject?)
-            instance.voicemailNotificationsSms = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["voicemail[notifications][sms]"] as AnyObject?)
-            instance.callNotificationsEmails = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["call_notifications[emails]"] as AnyObject?)
-            instance.callNotificationsSms = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["call_notifications[sms]"] as AnyObject?)
             return instance
         }
 
@@ -648,13 +639,9 @@ class Decoders {
             instance.name = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["name"] as AnyObject?)
             instance.blockIncoming = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["block_incoming"] as AnyObject?)
             instance.blockAnonymous = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["block_anonymous"] as AnyObject?)
-            instance.callerIdName = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["caller_id[name]"] as AnyObject?)
-            instance.callerIdType = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["caller_id[type]"] as AnyObject?)
-            instance.smsForwardingType = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["sms_forwarding[type]"] as AnyObject?)
-            instance.smsForwardingApplication = Decoders.decodeOptional(clazz: Any.self, source: sourceDictionary["sms_forwarding[application]"] as AnyObject?)
-            instance.smsForwardingExtension = Decoders.decodeOptional(clazz: Any.self, source: sourceDictionary["sms_forwarding[extension]"] as AnyObject?)
-            instance.callNotificationsEmails = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["call_notifications[emails]"] as AnyObject?)
-            instance.callNotificationsSms = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["call_notifications[sms]"] as AnyObject?)
+            instance.callerId = Decoders.decodeOptional(clazz: CallerIdPhoneNumber.self, source: sourceDictionary["caller_id"] as AnyObject?)
+            instance.smsForwarding = Decoders.decodeOptional(clazz: SmsForwardingParams.self, source: sourceDictionary["sms_forwarding"] as AnyObject?)
+            instance.callNotifications = Decoders.decodeOptional(clazz: CallNotifications.self, source: sourceDictionary["call_notifications"] as AnyObject?)
             return instance
         }
 
@@ -1842,7 +1829,8 @@ class Decoders {
             let sourceDictionary = source as! [AnyHashable: Any]
 
             let instance = ReplaceExtensionParams()
-            instance.voicemailGreetingAlternate = Decoders.decodeOptional(clazz: Any.self, source: sourceDictionary["voicemail[greeting][alternate]"] as AnyObject?)
+            instance.voicemail = Decoders.decodeOptional(clazz: Voicemail.self, source: sourceDictionary["voicemail"] as AnyObject?)
+            instance.callNotifications = Decoders.decodeOptional(clazz: CallNotifications.self, source: sourceDictionary["call_notifications"] as AnyObject?)
             instance.nameGreeting = Decoders.decodeOptional(clazz: Any.self, source: sourceDictionary["name_greeting"] as AnyObject?)
             instance.name = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["name"] as AnyObject?)
             instance.timezone = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["timezone"] as AnyObject?)
@@ -1850,21 +1838,11 @@ class Decoders {
             instance._extension = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["extension"] as AnyObject?)
             instance.enableOutboundCalls = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["enable_outbound_calls"] as AnyObject?)
             instance.usageType = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["usage_type"] as AnyObject?)
-            instance.voicemailPassword = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["voicemail[password]"] as AnyObject?)
             instance.fullName = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["full_name"] as AnyObject?)
             instance.enableCallWaiting = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["enable_call_waiting"] as AnyObject?)
-            instance.voicemailGreetingStandard = Decoders.decodeOptional(clazz: Any.self, source: sourceDictionary["voicemail[greeting][standard]"] as AnyObject?)
-            instance.voicemailGreetingType = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["voicemail[greeting][type]"] as AnyObject?)
             instance.callerId = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["caller_id"] as AnyObject?)
             instance.localAreaCode = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["local_area_code"] as AnyObject?)
-            instance.voicemailEnabled = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["voicemail[enabled]"] as AnyObject?)
-            instance.voicemailGreetingEnableLeaveMessagePrompt = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["voicemail[greeting][enable_leave_message_prompt]"] as AnyObject?)
-            instance.voicemailTranscription = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["voicemail[transcription]"] as AnyObject?)
-            instance.voicemailNotificationsEmails = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["voicemail[notifications][emails]"] as AnyObject?)
-            instance.voicemailNotificationsSms = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["voicemail[notifications][sms]"] as AnyObject?)
-            instance.callNotificationsEmails = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["call_notifications[emails]"] as AnyObject?)
-            instance.callNotificationsSms = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["call_notifications[sms]"] as AnyObject?)
-            instance.route = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["route"] as AnyObject?)
+            instance.route = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["route"] as AnyObject?)
             return instance
         }
 
@@ -1902,14 +1880,10 @@ class Decoders {
             instance.name = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["name"] as AnyObject?)
             instance.blockIncoming = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["block_incoming"] as AnyObject?)
             instance.blockAnonymous = Decoders.decodeOptional(clazz: Bool.self, source: sourceDictionary["block_anonymous"] as AnyObject?)
-            instance.callerIdName = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["caller_id[name]"] as AnyObject?)
-            instance.callerIdType = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["caller_id[type]"] as AnyObject?)
-            instance.smsForwardingType = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["sms_forwarding[type]"] as AnyObject?)
-            instance.smsForwardingApplication = Decoders.decodeOptional(clazz: Any.self, source: sourceDictionary["sms_forwarding[application]"] as AnyObject?)
-            instance.smsForwardingExtension = Decoders.decodeOptional(clazz: Any.self, source: sourceDictionary["sms_forwarding[extension]"] as AnyObject?)
+            instance.callerId = Decoders.decodeOptional(clazz: CallerIdPhoneNumber.self, source: sourceDictionary["caller_id"] as AnyObject?)
+            instance.smsForwarding = Decoders.decodeOptional(clazz: SmsForwardingParams.self, source: sourceDictionary["sms_forwarding"] as AnyObject?)
             instance.poolItem = Decoders.decodeOptional(clazz: Any.self, source: sourceDictionary["pool_item"] as AnyObject?)
-            instance.callNotificationsEmails = Decoders.decodeOptional(clazz: Array.self, source: sourceDictionary["call_notifications[emails]"] as AnyObject?)
-            instance.callNotificationsSms = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["call_notifications[sms]"] as AnyObject?)
+            instance.callNotifications = Decoders.decodeOptional(clazz: CallNotifications.self, source: sourceDictionary["call_notifications"] as AnyObject?)
             return instance
         }
 
@@ -2080,6 +2054,22 @@ class Decoders {
             instance.type = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["type"] as AnyObject?)
             instance._extension = Decoders.decodeOptional(clazz: ExtensionSummary.self, source: sourceDictionary["extension"] as AnyObject?)
             instance.application = Decoders.decodeOptional(clazz: ApplicationSummary.self, source: sourceDictionary["application"] as AnyObject?)
+            return instance
+        }
+
+
+        // Decoder for [SmsForwardingParams]
+        Decoders.addDecoder(clazz: [SmsForwardingParams].self) { (source: AnyObject) -> [SmsForwardingParams] in
+            return Decoders.decode(clazz: [SmsForwardingParams].self, source: source)
+        }
+        // Decoder for SmsForwardingParams
+        Decoders.addDecoder(clazz: SmsForwardingParams.self) { (source: AnyObject) -> SmsForwardingParams in
+            let sourceDictionary = source as! [AnyHashable: Any]
+
+            let instance = SmsForwardingParams()
+            instance.type = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["type"] as AnyObject?)
+            instance._extension = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["extension"] as AnyObject?)
+            instance.application = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["application"] as AnyObject?)
             return instance
         }
 

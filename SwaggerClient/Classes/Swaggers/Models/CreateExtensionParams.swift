@@ -9,6 +9,10 @@ import Foundation
 
 
 open class CreateExtensionParams: JSONEncodable {
+    /** Voicemail object */
+    public var voicemail: Voicemail?
+    /** Call Notifications object */
+    public var callNotifications: CallNotifications?
     /** Caller ID */
     public var callerId: String?
     /** Extension type */
@@ -27,40 +31,20 @@ open class CreateExtensionParams: JSONEncodable {
     public var timezone: String?
     /** Recording lookup object */
     public var nameGreeting: Any?
-    /** Recording lookup object */
-    public var voicemailGreetingAlternate: Any?
     /** Local area code */
     public var localAreaCode: Int32?
-    /** Enable the \&quot;leave a message\&quot; prompt for voicemail */
-    public var voicemailGreetingEnableLeaveMessagePrompt: Bool?
-    /** Voicemail enabled */
-    public var voicemailEnabled: Bool?
     /** Enable outgoing calls */
     public var enableOutboundCalls: Bool?
     /** Enable Call Waiting */
     public var enableCallWaiting: Bool?
-    /** Voicemail password */
-    public var voicemailPassword: Int32?
-    /** Voicemail greeting type */
-    public var voicemailGreetingType: String?
-    /** Recording lookup object */
-    public var voicemailGreetingStandard: Any?
-    /** Voicemail transcription type */
-    public var voicemailTranscription: String?
-    /** Email notifications for voicemails. Can be a single email or an array of emails */
-    public var voicemailNotificationsEmails: [String]?
-    /** SMS notifications for voicemails */
-    public var voicemailNotificationsSms: String?
-    /** Email notifications for calls. Can be a single email or an array of emails */
-    public var callNotificationsEmails: [String]?
-    /** SMS notifications for calls */
-    public var callNotificationsSms: String?
 
     public init() {}
 
     // MARK: JSONEncodable
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
+        nillableDictionary["voicemail"] = self.voicemail?.encodeToJSON()
+        nillableDictionary["call_notifications"] = self.callNotifications?.encodeToJSON()
         nillableDictionary["caller_id"] = self.callerId
         nillableDictionary["usage_type"] = self.usageType
         nillableDictionary["allows_call_waiting"] = self.allowsCallWaiting
@@ -70,20 +54,9 @@ open class CreateExtensionParams: JSONEncodable {
         nillableDictionary["full_name"] = self.fullName
         nillableDictionary["timezone"] = self.timezone
         nillableDictionary["name_greeting"] = self.nameGreeting
-        nillableDictionary["voicemail[greeting][alternate]"] = self.voicemailGreetingAlternate
         nillableDictionary["local_area_code"] = self.localAreaCode?.encodeToJSON()
-        nillableDictionary["voicemail[greeting][enable_leave_message_prompt]"] = self.voicemailGreetingEnableLeaveMessagePrompt
-        nillableDictionary["voicemail[enabled]"] = self.voicemailEnabled
         nillableDictionary["enable_outbound_calls"] = self.enableOutboundCalls
         nillableDictionary["enable_call_waiting"] = self.enableCallWaiting
-        nillableDictionary["voicemail[password]"] = self.voicemailPassword?.encodeToJSON()
-        nillableDictionary["voicemail[greeting][type]"] = self.voicemailGreetingType
-        nillableDictionary["voicemail[greeting][standard]"] = self.voicemailGreetingStandard
-        nillableDictionary["voicemail[transcription]"] = self.voicemailTranscription
-        nillableDictionary["voicemail[notifications][emails]"] = self.voicemailNotificationsEmails?.encodeToJSON()
-        nillableDictionary["voicemail[notifications][sms]"] = self.voicemailNotificationsSms
-        nillableDictionary["call_notifications[emails]"] = self.callNotificationsEmails?.encodeToJSON()
-        nillableDictionary["call_notifications[sms]"] = self.callNotificationsSms
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

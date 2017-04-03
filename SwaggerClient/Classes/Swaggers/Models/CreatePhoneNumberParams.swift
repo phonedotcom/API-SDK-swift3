@@ -19,20 +19,12 @@ open class CreatePhoneNumberParams: JSONEncodable {
     public var blockIncoming: Bool?
     /** Block anonymous calls */
     public var blockAnonymous: Bool?
-    /** Caller ID name */
-    public var callerIdName: String?
-    /** Caller ID type */
-    public var callerIdType: String?
-    /** &#39;application&#39; or &#39;extension&#39; */
-    public var smsForwardingType: String?
-    /** Application lookup object */
-    public var smsForwardingApplication: Any?
-    /** Extension lookup object */
-    public var smsForwardingExtension: Any?
-    /** Call notifications for emails. Can be a single email or an array of emails */
-    public var callNotificationsEmails: [String]?
-    /** Call notification for SMS */
-    public var callNotificationsSms: String?
+    /** Caller ID object */
+    public var callerId: CallerIdPhoneNumber?
+    /** SMS Forwarding Object, or NULL */
+    public var smsForwarding: SmsForwardingParams?
+    /** Call Notifications object */
+    public var callNotifications: CallNotifications?
 
     public init() {}
 
@@ -44,13 +36,9 @@ open class CreatePhoneNumberParams: JSONEncodable {
         nillableDictionary["name"] = self.name
         nillableDictionary["block_incoming"] = self.blockIncoming
         nillableDictionary["block_anonymous"] = self.blockAnonymous
-        nillableDictionary["caller_id[name]"] = self.callerIdName
-        nillableDictionary["caller_id[type]"] = self.callerIdType
-        nillableDictionary["sms_forwarding[type]"] = self.smsForwardingType
-        nillableDictionary["sms_forwarding[application]"] = self.smsForwardingApplication
-        nillableDictionary["sms_forwarding[extension]"] = self.smsForwardingExtension
-        nillableDictionary["call_notifications[emails]"] = self.callNotificationsEmails?.encodeToJSON()
-        nillableDictionary["call_notifications[sms]"] = self.callNotificationsSms
+        nillableDictionary["caller_id"] = self.callerId?.encodeToJSON()
+        nillableDictionary["sms_forwarding"] = self.smsForwarding?.encodeToJSON()
+        nillableDictionary["call_notifications"] = self.callNotifications?.encodeToJSON()
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

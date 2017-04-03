@@ -9,8 +9,10 @@ import Foundation
 
 
 open class ReplaceExtensionParams: JSONEncodable {
-    /** Recording lookup object */
-    public var voicemailGreetingAlternate: Any?
+    /** Voicemail object */
+    public var voicemail: Voicemail?
+    /** Call Notifications object */
+    public var callNotifications: CallNotifications?
     /** Recording lookup object */
     public var nameGreeting: Any?
     /** Name (required) */
@@ -25,43 +27,24 @@ open class ReplaceExtensionParams: JSONEncodable {
     public var enableOutboundCalls: Bool?
     /** Extension type */
     public var usageType: String?
-    /** Voicemail password */
-    public var voicemailPassword: Int32?
     /** Contact name */
     public var fullName: String?
     /** Enable Call Waiting */
     public var enableCallWaiting: Bool?
-    /** Recording lookup object */
-    public var voicemailGreetingStandard: Any?
-    /** Voicemail greeting type */
-    public var voicemailGreetingType: String?
     /** Caller ID */
     public var callerId: String?
     /** Local area code */
     public var localAreaCode: Int32?
-    /** Voicemail enabled */
-    public var voicemailEnabled: Bool?
-    /** Use leave message prompt after voicemail */
-    public var voicemailGreetingEnableLeaveMessagePrompt: Bool?
-    /** Voicemail transcription type */
-    public var voicemailTranscription: String?
-    /** Email notifications for voicemails. Can be a single email or an array of emails */
-    public var voicemailNotificationsEmails: [String]?
-    /** SMS notifications for voicemails */
-    public var voicemailNotificationsSms: String?
-    /** Email notifications for calls. Can be a single email or an array of emails */
-    public var callNotificationsEmails: [String]?
-    /** SMS notifications for calls */
-    public var callNotificationsSms: String?
     /** Route object lookup (must belong to this extension) */
-    public var route: [String]?
+    public var route: String?
 
     public init() {}
 
     // MARK: JSONEncodable
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
-        nillableDictionary["voicemail[greeting][alternate]"] = self.voicemailGreetingAlternate
+        nillableDictionary["voicemail"] = self.voicemail?.encodeToJSON()
+        nillableDictionary["call_notifications"] = self.callNotifications?.encodeToJSON()
         nillableDictionary["name_greeting"] = self.nameGreeting
         nillableDictionary["name"] = self.name
         nillableDictionary["timezone"] = self.timezone
@@ -69,21 +52,11 @@ open class ReplaceExtensionParams: JSONEncodable {
         nillableDictionary["extension"] = self._extension?.encodeToJSON()
         nillableDictionary["enable_outbound_calls"] = self.enableOutboundCalls
         nillableDictionary["usage_type"] = self.usageType
-        nillableDictionary["voicemail[password]"] = self.voicemailPassword?.encodeToJSON()
         nillableDictionary["full_name"] = self.fullName
         nillableDictionary["enable_call_waiting"] = self.enableCallWaiting
-        nillableDictionary["voicemail[greeting][standard]"] = self.voicemailGreetingStandard
-        nillableDictionary["voicemail[greeting][type]"] = self.voicemailGreetingType
         nillableDictionary["caller_id"] = self.callerId
         nillableDictionary["local_area_code"] = self.localAreaCode?.encodeToJSON()
-        nillableDictionary["voicemail[enabled]"] = self.voicemailEnabled
-        nillableDictionary["voicemail[greeting][enable_leave_message_prompt]"] = self.voicemailGreetingEnableLeaveMessagePrompt
-        nillableDictionary["voicemail[transcription]"] = self.voicemailTranscription
-        nillableDictionary["voicemail[notifications][emails]"] = self.voicemailNotificationsEmails?.encodeToJSON()
-        nillableDictionary["voicemail[notifications][sms]"] = self.voicemailNotificationsSms
-        nillableDictionary["call_notifications[emails]"] = self.callNotificationsEmails?.encodeToJSON()
-        nillableDictionary["call_notifications[sms]"] = self.callNotificationsSms
-        nillableDictionary["route"] = self.route?.encodeToJSON()
+        nillableDictionary["route"] = self.route
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }
