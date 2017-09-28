@@ -10,6 +10,7 @@ import Foundation
 
 /** Here are all of the properties you can expect for Caller ID objects: */
 open class CallerIdFull: JSONEncodable {
+
     /** Phone number, in E.164 format */
     public var number: String?
     /** Name you have supplied for this number */
@@ -25,6 +26,7 @@ open class CallerIdFull: JSONEncodable {
         nillableDictionary["number"] = self.number
         nillableDictionary["name"] = self.name
         nillableDictionary["type"] = self.type
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

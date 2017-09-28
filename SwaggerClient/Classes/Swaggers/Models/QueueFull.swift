@@ -10,6 +10,7 @@ import Foundation
 
 /** The Full QueueObject has the same properties as the Queue Summary Object, along with the following: */
 open class QueueFull: JSONEncodable {
+
     /** Integer ID. Read-only. */
     public var id: Int32?
     /** Name. Required. */
@@ -39,6 +40,7 @@ open class QueueFull: JSONEncodable {
         nillableDictionary["caller_id_type"] = self.callerIdType
         nillableDictionary["ring_time"] = self.ringTime?.encodeToJSON()
         nillableDictionary["members"] = self.members?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

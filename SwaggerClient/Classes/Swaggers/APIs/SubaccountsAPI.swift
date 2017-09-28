@@ -5,6 +5,7 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
@@ -14,7 +15,7 @@ open class SubaccountsAPI: APIBase {
      Add a subaccount for the authenticated user or client
      
      - parameter accountId: (path) Account ID 
-     - parameter data: (body) SMS data 
+     - parameter data: (body) Subaccount data 
      - parameter completion: completion handler to receive the data and the error objects
      */
     open class func createAccountSubaccount(accountId: Int32, data: CreateSubaccountParams, completion: @escaping ((_ data: AccountFull?,_ error: Error?) -> Void)) {
@@ -26,8 +27,8 @@ open class SubaccountsAPI: APIBase {
 
     /**
      Add a subaccount for the authenticated user or client
-     - POST /accounts/{accountId}/subaccounts
-     - This service shows the details of an individual Subaccount.
+     - POST /accounts/{account_id}/subaccounts
+     - Add a subaccount for the authenticated user or client
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -53,20 +54,20 @@ open class SubaccountsAPI: APIBase {
   "name" : "aeiou",
   "master_account" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 6
   },
-  "id" : 123,
+  "id" : 0,
   "username" : "aeiou"
 }}]
      
      - parameter accountId: (path) Account ID 
-     - parameter data: (body) SMS data 
+     - parameter data: (body) Subaccount data 
 
      - returns: RequestBuilder<AccountFull> 
      */
     open class func createAccountSubaccountWithRequestBuilder(accountId: Int32, data: CreateSubaccountParams) -> RequestBuilder<AccountFull> {
-        var path = "/accounts/{accountId}/subaccounts"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/subaccounts"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data.encodeToJSON() as? [String:AnyObject]
 
@@ -98,15 +99,15 @@ open class SubaccountsAPI: APIBase {
 
     /**
      Get a list of subaccounts for the authenticated user or client
-     - GET /accounts/{accountId}/subaccounts
-     - This service lists the Subaccount of the authenticated client. In most cases, there will not be any.
+     - GET /accounts/{account_id}/subaccounts
+     - Get a list of subaccounts for the authenticated user or client
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "id" : "aeiou"
   },
@@ -135,9 +136,9 @@ open class SubaccountsAPI: APIBase {
     "name" : "aeiou",
     "master_account" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     },
-    "id" : 123,
+    "id" : 5,
     "username" : "aeiou"
   } ]
 }}]
@@ -152,8 +153,8 @@ open class SubaccountsAPI: APIBase {
      - returns: RequestBuilder<ListAccounts> 
      */
     open class func listAccountSubaccountsWithRequestBuilder(accountId: Int32, filtersId: [String]? = nil, sortId: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListAccounts> {
-        var path = "/accounts/{accountId}/subaccounts"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/subaccounts"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 

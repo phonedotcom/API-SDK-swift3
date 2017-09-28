@@ -10,6 +10,7 @@ import Foundation
 
 /** Device Membership Object, or NULL. Read-only. See below for details. */
 open class DeviceMembership: JSONEncodable {
+
     /** Line number to which this extension is assigned. Integer. */
     public var line: Int32?
     /** Device that this extension belongs to. Output is an Device Summary Object. */
@@ -22,6 +23,7 @@ open class DeviceMembership: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["line"] = self.line?.encodeToJSON()
         nillableDictionary["device"] = self.device?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

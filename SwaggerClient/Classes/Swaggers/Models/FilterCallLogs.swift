@@ -9,6 +9,7 @@ import Foundation
 
 
 open class FilterCallLogs: JSONEncodable {
+
     public var id: String?
     public var startTime: String?
     public var createdAt: String?
@@ -27,6 +28,7 @@ open class FilterCallLogs: JSONEncodable {
         nillableDictionary["direction"] = self.direction
         nillableDictionary["called_number"] = self.calledNumber
         nillableDictionary["type"] = self.type
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

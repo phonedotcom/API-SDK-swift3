@@ -10,6 +10,7 @@ import Foundation
 
 /** The Extension Summary Object is used to briefly represent an extension. It can be seen in several places throughout this API. Here are the properties: */
 open class ExtensionSummary: JSONEncodable {
+
     /** ID of the extension. This is the internal Phone.com ID, not the extension number callers may dial. */
     public var id: Int32?
     /** User-supplied name for the extension. On POST, leaving this empty will result in an auto-generated value. On PUT, this field is required. */
@@ -25,6 +26,7 @@ open class ExtensionSummary: JSONEncodable {
         nillableDictionary["id"] = self.id?.encodeToJSON()
         nillableDictionary["name"] = self.name
         nillableDictionary["extension"] = self._extension?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

@@ -9,21 +9,19 @@ import Foundation
 
 
 open class ReplacePhoneNumberParams: JSONEncodable {
+
     /** Route lookup object */
     public var route: Any?
     /** Phone Name */
     public var name: String?
     /** Block incoming calls */
-    public var blockIncoming: Bool?
+    public var blockIncoming: String?
     /** Block anonymous calls */
-    public var blockAnonymous: Bool?
-    /** Caller ID object */
+    public var blockAnonymous: String?
     public var callerId: CallerIdPhoneNumber?
-    /** SMS Forwarding Object, or NULL */
     public var smsForwarding: SmsForwardingParams?
     /** Pool lookup object */
     public var poolItem: Any?
-    /** Call Notifications object */
     public var callNotifications: CallNotifications?
 
     public init() {}
@@ -39,6 +37,7 @@ open class ReplacePhoneNumberParams: JSONEncodable {
         nillableDictionary["sms_forwarding"] = self.smsForwarding?.encodeToJSON()
         nillableDictionary["pool_item"] = self.poolItem
         nillableDictionary["call_notifications"] = self.callNotifications?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

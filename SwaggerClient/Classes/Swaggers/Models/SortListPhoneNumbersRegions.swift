@@ -9,6 +9,7 @@ import Foundation
 
 
 open class SortListPhoneNumbersRegions: JSONEncodable {
+
     public var countryCode: String?
     public var npa: String?
     public var nxx: String?
@@ -29,6 +30,7 @@ open class SortListPhoneNumbersRegions: JSONEncodable {
         nillableDictionary["city"] = self.city
         nillableDictionary["province_postal_code"] = self.provincePostalCode
         nillableDictionary["country_postal_code"] = self.countryPostalCode
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

@@ -8,8 +8,9 @@
 import Foundation
 
 
-/** The Full SMS Object is identical to the SMS Summary Object. See above for details. */
+/** The Full SMS Object includes all of the properties in the SMS Summary Object. */
 open class SmsFull: JSONEncodable {
+
     /** Unique SMS ID. Read-only. */
     public var id: String?
     /** Caller ID number to display on the incoming/outgoing SMS message. For an outgoing message, it must be a phone number associated with your Phone.com account. */
@@ -24,6 +25,8 @@ open class SmsFull: JSONEncodable {
     public var createdAt: Date?
     /** Body of the SMS text */
     public var text: String?
+    /** True when SMS is new; False when SMS has been read. */
+    public var isNew: Bool?
 
     public init() {}
 
@@ -37,6 +40,8 @@ open class SmsFull: JSONEncodable {
         nillableDictionary["created_epoch"] = self.createdEpoch?.encodeToJSON()
         nillableDictionary["created_at"] = self.createdAt?.encodeToJSON()
         nillableDictionary["text"] = self.text
+        nillableDictionary["is_new"] = self.isNew
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

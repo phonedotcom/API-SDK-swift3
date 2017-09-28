@@ -10,6 +10,7 @@ import Foundation
 
 /** Contact Address Object. See below for details. */
 open class Address: JSONEncodable {
+
     /** Street address line 1. Required. */
     public var line1: String?
     /** Street address line 2 */
@@ -34,6 +35,7 @@ open class Address: JSONEncodable {
         nillableDictionary["province"] = self.province
         nillableDictionary["postal_code"] = self.postalCode
         nillableDictionary["country"] = self.country
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

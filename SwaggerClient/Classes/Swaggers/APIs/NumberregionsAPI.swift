@@ -5,6 +5,7 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
@@ -48,9 +49,9 @@ open class NumberregionsAPI: APIBase {
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "group_by" : [ "aeiou" ],
   "filters" : {
     "country_code" : "aeiou",
@@ -72,13 +73,13 @@ open class NumberregionsAPI: APIBase {
   },
   "items" : [ {
     "country_code" : "aeiou",
-    "quantity" : 123,
+    "quantity" : 7,
     "province_postal_code" : "aeiou",
     "country_postal_code" : "aeiou",
     "city" : "aeiou",
-    "is_toll_free" : 123,
-    "npa" : 123,
-    "nxx" : 123
+    "is_toll_free" : 2,
+    "npa" : 5,
+    "nxx" : 5
   } ]
 }}]
      

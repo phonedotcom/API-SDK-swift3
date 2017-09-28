@@ -9,6 +9,7 @@ import Foundation
 
 
 open class CreateTrunkParams: JSONEncodable {
+
     /** Name of Trunk */
     public var name: String?
     /** URI of Trunk (in the form of SIP/user@host.com:port) */
@@ -36,6 +37,7 @@ open class CreateTrunkParams: JSONEncodable {
         nillableDictionary["greeting"] = self.greeting
         nillableDictionary["error_message"] = self.errorMessage
         nillableDictionary["codecs"] = self.codecs?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

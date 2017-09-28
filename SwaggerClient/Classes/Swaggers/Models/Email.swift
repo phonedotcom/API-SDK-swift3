@@ -9,6 +9,7 @@ import Foundation
 
 
 open class Email: JSONEncodable {
+
     /** Email type, one of: primary or alternate. Default is primary. */
     public var type: String?
     /** Email address. Required. */
@@ -21,6 +22,7 @@ open class Email: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["type"] = self.type
         nillableDictionary["email"] = self.email
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

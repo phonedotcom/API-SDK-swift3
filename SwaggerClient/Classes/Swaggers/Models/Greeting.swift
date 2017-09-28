@@ -10,6 +10,7 @@ import Foundation
 
 /** Voicemail Greeting Object. See below for details. Can be set to NULL to reset greeting options. */
 open class Greeting: JSONEncodable {
+
     /** The greeting to play. Can be \&quot;name\&quot; for the name_greeting as described above, \&quot;standard\&quot; for the standard greeting, or \&quot;alternate\&quot; for an alternate greeting. See below for details. */
     public var type: String?
     /** Greeting to be played when type&#x3D;\&quot;alternate\&quot;. Output is a Greeting Summary Object. Input must be a Greeting Lookup Object. */
@@ -28,6 +29,7 @@ open class Greeting: JSONEncodable {
         nillableDictionary["alternate"] = self.alternate?.encodeToJSON()
         nillableDictionary["standard"] = self.standard?.encodeToJSON()
         nillableDictionary["enable_leave_message_prompt"] = self.enableLeaveMessagePrompt
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

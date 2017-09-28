@@ -9,14 +9,15 @@ import Foundation
 
 
 open class CreateSubaccountParams: JSONEncodable {
+
     /** Sub account password */
     public var username: String?
     /** Sub account password */
     public var password: String?
     /** Contact Object. See below for details. */
-    public var contact: ContactSubaccount?
+    public var contact: ContactResponse?
     /** Contact Object for billing purposes. See below for details. */
-    public var billingContact: ContactSubaccount?
+    public var billingContact: ContactResponse?
 
     public init() {}
 
@@ -27,6 +28,7 @@ open class CreateSubaccountParams: JSONEncodable {
         nillableDictionary["password"] = self.password
         nillableDictionary["contact"] = self.contact?.encodeToJSON()
         nillableDictionary["billing_contact"] = self.billingContact?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

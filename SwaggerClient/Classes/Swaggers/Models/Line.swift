@@ -9,6 +9,7 @@ import Foundation
 
 
 open class Line: JSONEncodable {
+
     /** Line number */
     public var line: Int32?
     /** Extensions object that this line number is mapped to. */
@@ -21,6 +22,7 @@ open class Line: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["line"] = self.line?.encodeToJSON()
         nillableDictionary["extension"] = self._extension?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

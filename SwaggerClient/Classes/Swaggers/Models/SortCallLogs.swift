@@ -9,6 +9,7 @@ import Foundation
 
 
 open class SortCallLogs: JSONEncodable {
+
     public var id: String?
     public var startTime: String?
     public var createdAt: String?
@@ -21,6 +22,7 @@ open class SortCallLogs: JSONEncodable {
         nillableDictionary["id"] = self.id
         nillableDictionary["start_time"] = self.startTime
         nillableDictionary["created_at"] = self.createdAt
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

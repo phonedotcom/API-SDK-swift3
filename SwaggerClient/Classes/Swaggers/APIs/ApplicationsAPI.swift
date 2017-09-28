@@ -5,13 +5,14 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
 
 open class ApplicationsAPI: APIBase {
     /**
-     Show details of an individual application
+     Show details of an individual Application on a given account.
      
      - parameter accountId: (path) Account ID 
      - parameter applicationId: (path) Application ID 
@@ -25,15 +26,15 @@ open class ApplicationsAPI: APIBase {
 
 
     /**
-     Show details of an individual application
-     - GET /accounts/{accountId}/applications/{applicationId}
-     - 
+     Show details of an individual Application on a given account.
+     - GET /accounts/{account_id}/applications/{application_id}
+     - Show details of an individual Application on a given account.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "name" : "aeiou",
-  "id" : 123
+  "id" : 0
 }}]
      
      - parameter accountId: (path) Account ID 
@@ -42,9 +43,9 @@ open class ApplicationsAPI: APIBase {
      - returns: RequestBuilder<ApplicationFull> 
      */
     open class func getAccountApplicationWithRequestBuilder(accountId: Int32, applicationId: Int32) -> RequestBuilder<ApplicationFull> {
-        var path = "/accounts/{accountId}/applications/{applicationId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{applicationId}", with: "\(applicationId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/applications/{application_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{application_id}", with: "\(applicationId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -57,7 +58,7 @@ open class ApplicationsAPI: APIBase {
     }
 
     /**
-     Get a list of applications you have defined
+     This service lists the Applications on a given account
      
      - parameter accountId: (path) Account ID 
      - parameter filtersId: (query) ID filter (optional)
@@ -77,16 +78,16 @@ open class ApplicationsAPI: APIBase {
 
 
     /**
-     Get a list of applications you have defined
-     - GET /accounts/{accountId}/applications
-     - Get a list of an account available applications
+     This service lists the Applications on a given account
+     - GET /accounts/{account_id}/applications
+     - Show details of an individual Application on a given account.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "name" : "aeiou",
     "id" : "aeiou"
@@ -97,7 +98,7 @@ open class ApplicationsAPI: APIBase {
   },
   "items" : [ {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 5
   } ]
 }}]
      
@@ -113,8 +114,8 @@ open class ApplicationsAPI: APIBase {
      - returns: RequestBuilder<ListApplications> 
      */
     open class func listAccountApplicationsWithRequestBuilder(accountId: Int32, filtersId: [String]? = nil, filtersName: [String]? = nil, sortId: String? = nil, sortName: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListApplications> {
-        var path = "/accounts/{accountId}/applications"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/applications"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 

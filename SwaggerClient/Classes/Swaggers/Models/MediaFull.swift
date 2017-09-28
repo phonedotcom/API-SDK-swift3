@@ -8,8 +8,9 @@
 import Foundation
 
 
-/** The Full Recording Object includes all of the properties from the Recording Summary Object, along with the following: */
+/** The Full Recording Object and the Summary Recording Object are the same. */
 open class MediaFull: JSONEncodable {
+
     /** Recording ID. Read-only. */
     public var id: Int32?
     /** Name of recording */
@@ -25,6 +26,7 @@ open class MediaFull: JSONEncodable {
         nillableDictionary["id"] = self.id?.encodeToJSON()
         nillableDictionary["name"] = self.name
         nillableDictionary["type"] = self.type
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

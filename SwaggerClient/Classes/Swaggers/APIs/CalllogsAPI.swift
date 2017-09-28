@@ -5,6 +5,7 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
@@ -26,37 +27,41 @@ open class CalllogsAPI: APIBase {
 
     /**
      Show details of an individual Call Log entry
-     - GET /accounts/{accountId}/call-logs/{callId}
-     - See Call Logs for more detail.
+     - GET /accounts/{account_id}/call-logs/{call_id}
+     - Show details of an individual Call Log entry. See Call Logs for more detail.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "call_number" : "aeiou",
-  "call_recording" : "aeiou",
   "extension" : {
-    "extension" : 123,
+    "extension" : 6,
     "name" : "aeiou",
-    "id" : 123
+    "id" : 0
   },
   "caller_cnam" : "aeiou",
+  "voicemail_cp_url" : "aeiou",
   "created_at" : "aeiou",
   "type" : "aeiou",
   "uuid" : "aeiou",
-  "call_duration" : 123,
+  "call_duration" : 1,
   "final_action" : "aeiou",
   "start_time" : "aeiou",
+  "call_recording_url" : "aeiou",
   "is_monitored" : "aeiou",
   "caller_id" : "aeiou",
+  "voicemail_transcript" : "aeiou",
   "details" : [ {
-    "start_time" : 123,
-    "voip_phone_id" : 123,
+    "start_time" : 5,
+    "voip_phone_id" : 7,
     "type" : "aeiou",
-    "id_value" : 123,
-    "voip_id" : 123
+    "id_value" : 5,
+    "voip_id" : 2
   } ],
   "id" : "aeiou",
   "called_number" : "aeiou",
+  "voicemail_url" : "aeiou",
+  "call_recording_cp_url" : "aeiou",
   "direction" : "aeiou"
 }}]
      
@@ -66,9 +71,9 @@ open class CalllogsAPI: APIBase {
      - returns: RequestBuilder<CallLogFull> 
      */
     open class func getAccountCallLogsWithRequestBuilder(accountId: Int32, callId: String) -> RequestBuilder<CallLogFull> {
-        var path = "/accounts/{accountId}/call-logs/{callId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{callId}", with: "\(callId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/call-logs/{call_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{call_id}", with: "\(callId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -108,15 +113,15 @@ open class CalllogsAPI: APIBase {
 
     /**
      Get a list of call details associated with your account
-     - GET /accounts/{accountId}/call-logs
-     - See Call Logs for more detail.
+     - GET /accounts/{account_id}/call-logs
+     - Get a list of call details associated with your account. See Call Logs for more detail.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "start_time" : "aeiou",
     "created_at" : "aeiou",
@@ -132,30 +137,34 @@ open class CalllogsAPI: APIBase {
   },
   "items" : [ {
     "call_number" : "aeiou",
-    "call_recording" : "aeiou",
     "extension" : {
-      "extension" : 123,
+      "extension" : 5,
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     },
     "caller_cnam" : "aeiou",
+    "voicemail_cp_url" : "aeiou",
     "created_at" : "aeiou",
     "type" : "aeiou",
     "uuid" : "aeiou",
-    "call_duration" : 123,
+    "call_duration" : 2,
     "final_action" : "aeiou",
     "start_time" : "aeiou",
+    "call_recording_url" : "aeiou",
     "is_monitored" : "aeiou",
     "caller_id" : "aeiou",
+    "voicemail_transcript" : "aeiou",
     "details" : [ {
-      "start_time" : 123,
-      "voip_phone_id" : 123,
+      "start_time" : 7,
+      "voip_phone_id" : 2,
       "type" : "aeiou",
-      "id_value" : 123,
-      "voip_id" : 123
+      "id_value" : 9,
+      "voip_id" : 3
     } ],
     "id" : "aeiou",
     "called_number" : "aeiou",
+    "voicemail_url" : "aeiou",
+    "call_recording_cp_url" : "aeiou",
     "direction" : "aeiou"
   } ]
 }}]
@@ -178,8 +187,8 @@ open class CalllogsAPI: APIBase {
      - returns: RequestBuilder<ListCallLogs> 
      */
     open class func listAccountCallLogsWithRequestBuilder(accountId: Int32, filtersId: [String]? = nil, filtersStartTime: [String]? = nil, filtersCreatedAt: String? = nil, filtersDirection: String? = nil, filtersCalledNumber: String? = nil, filtersType: String? = nil, filtersExtension: [String]? = nil, sortId: String? = nil, sortStartTime: String? = nil, sortCreatedAt: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListCallLogs> {
-        var path = "/accounts/{accountId}/call-logs"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/call-logs"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 

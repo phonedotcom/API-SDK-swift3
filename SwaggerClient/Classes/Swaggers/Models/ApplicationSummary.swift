@@ -10,6 +10,7 @@ import Foundation
 
 /** The Application Summary Object is used to briefly represent an application. It can occur in several places throughout this API. Here are the properties: */
 open class ApplicationSummary: JSONEncodable {
+
     /** Application ID. Read-only. */
     public var id: Int32?
     /** Application name */
@@ -22,6 +23,7 @@ open class ApplicationSummary: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["id"] = self.id?.encodeToJSON()
         nillableDictionary["name"] = self.name
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

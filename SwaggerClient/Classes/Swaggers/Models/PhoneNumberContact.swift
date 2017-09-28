@@ -9,6 +9,7 @@ import Foundation
 
 
 open class PhoneNumberContact: JSONEncodable {
+
     /** Type of phone number, must be one of: home, business, mobile, fax, pager. Default is home. */
     public var type: String?
     /** Phone number, as entered. Does not need to be formatted in any particular way. Required. */
@@ -24,6 +25,7 @@ open class PhoneNumberContact: JSONEncodable {
         nillableDictionary["type"] = self.type
         nillableDictionary["number"] = self.number
         nillableDictionary["normalized"] = self.normalized
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

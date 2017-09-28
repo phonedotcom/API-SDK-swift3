@@ -5,6 +5,7 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
@@ -26,14 +27,14 @@ open class SchedulesAPI: APIBase {
 
     /**
      Show details of an individual schedule
-     - GET /accounts/{accountId}/schedules/{scheduleId}
-     - This service shows the details of an individual schedule.
+     - GET /accounts/{account_id}/schedules/{schedule_id}
+     - Show details of an individual schedule
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "name" : "aeiou",
-  "id" : 123
+  "id" : 0
 }}]
      
      - parameter accountId: (path) Account ID 
@@ -42,9 +43,9 @@ open class SchedulesAPI: APIBase {
      - returns: RequestBuilder<ScheduleFull> 
      */
     open class func getAccountScheduleWithRequestBuilder(accountId: Int32, scheduleId: Int32) -> RequestBuilder<ScheduleFull> {
-        var path = "/accounts/{accountId}/schedules/{scheduleId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{scheduleId}", with: "\(scheduleId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/schedules/{schedule_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{schedule_id}", with: "\(scheduleId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -78,15 +79,15 @@ open class SchedulesAPI: APIBase {
 
     /**
      Get a list of schedules for an account
-     - GET /accounts/{accountId}/schedules
-     - See Intro to Schedules for more info on the properties.
+     - GET /accounts/{account_id}/schedules
+     - Get a list of schedules for an account
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "name" : "aeiou",
     "id" : "aeiou"
@@ -97,7 +98,7 @@ open class SchedulesAPI: APIBase {
   },
   "items" : [ {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 5
   } ]
 }}]
      
@@ -113,8 +114,8 @@ open class SchedulesAPI: APIBase {
      - returns: RequestBuilder<ListSchedules> 
      */
     open class func listAccountSchedulesWithRequestBuilder(accountId: Int32, filtersId: [String]? = nil, filtersName: [String]? = nil, sortId: String? = nil, sortName: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListSchedules> {
-        var path = "/accounts/{accountId}/schedules"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/schedules"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 

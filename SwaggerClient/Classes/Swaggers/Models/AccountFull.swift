@@ -10,6 +10,7 @@ import Foundation
 
 /** The Full Account Object includes all of the properties in the Account Summary Object, along with the following: */
 open class AccountFull: JSONEncodable {
+
     /** Account ID. Sometimes referred to as \&quot;Voip ID\&quot; or \&quot;voip_id\&quot;. */
     public var id: Int32?
     /** Name on the account. Read-only. */
@@ -37,6 +38,7 @@ open class AccountFull: JSONEncodable {
         nillableDictionary["master_account"] = self.masterAccount?.encodeToJSON()
         nillableDictionary["contact"] = self.contact?.encodeToJSON()
         nillableDictionary["billing_contact"] = self.billingContact?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

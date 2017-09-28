@@ -10,6 +10,7 @@ import Foundation
 
 /**  */
 open class CallFull: JSONEncodable {
+
     /**  */
     public var id: String?
 
@@ -19,6 +20,7 @@ open class CallFull: JSONEncodable {
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["id"] = self.id
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

@@ -5,13 +5,14 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
 
 open class RoutesAPI: APIBase {
     /**
-     Add a new address book contact for an extension
+     Add a new route to the account.
      
      - parameter accountId: (path) Account ID 
      - parameter data: (body) Route data (optional)
@@ -25,31 +26,31 @@ open class RoutesAPI: APIBase {
 
 
     /**
-     Add a new address book contact for an extension
-     - POST /accounts/{accountId}/routes
-     - For more on the input fields, see Intro to Routes.
+     Add a new route to the account.
+     - POST /accounts/{account_id}/routes
+     - Add a new route to the account. See Intro to Routes for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "extension" : {
-    "extension" : 123,
+    "extension" : 1,
     "name" : "aeiou",
-    "id" : 123
+    "id" : 6
   },
   "name" : "aeiou",
   "rules" : [ {
     "filter" : {
       "schedule" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 5
       },
       "contact" : {
         "prefix" : "aeiou",
         "nickname" : "aeiou",
         "last_name" : "aeiou",
         "company" : "aeiou",
-        "id" : 123,
+        "id" : 5,
         "middle_name" : "aeiou",
         "suffix" : "aeiou",
         "first_name" : "aeiou"
@@ -57,43 +58,43 @@ open class RoutesAPI: APIBase {
       "type" : "aeiou",
       "group" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 2
       }
     },
     "actions" : [ {
-      "duration" : 123,
+      "duration" : 3,
       "extension" : "",
       "hold_music" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 9
       },
       "greeting" : "",
       "action" : "aeiou",
       "menu" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 2
       },
       "trunk" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 7
       },
       "items" : [ {
         "number" : "aeiou",
         "extension" : "",
-        "screening" : true,
-        "caller_id" : "aeiou",
+        "screening" : false,
+        "caller_id" : "calling_number",
         "voice_tag" : "aeiou",
         "distinctive_ring" : "aeiou",
         "type" : "aeiou"
       } ],
-      "timeout" : 123,
+      "timeout" : 7,
       "queue" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 4
       }
     } ]
   } ],
-  "id" : 123
+  "id" : 0
 }}]
      
      - parameter accountId: (path) Account ID 
@@ -102,8 +103,8 @@ open class RoutesAPI: APIBase {
      - returns: RequestBuilder<RouteFull> 
      */
     open class func createRouteWithRequestBuilder(accountId: Int32, data: CreateRouteParams? = nil) -> RequestBuilder<RouteFull> {
-        var path = "/accounts/{accountId}/routes"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/routes"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 
@@ -116,13 +117,13 @@ open class RoutesAPI: APIBase {
     }
 
     /**
-     
+     Delete a route from the account.
      
      - parameter accountId: (path) Account ID 
      - parameter routeId: (path) Route ID 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func deleteAccountRoute(accountId: Int32, routeId: Int32, completion: @escaping ((_ data: DeleteRoute?,_ error: Error?) -> Void)) {
+    open class func deleteAccountRoute(accountId: Int32, routeId: Int32, completion: @escaping ((_ data: DeleteEntry?,_ error: Error?) -> Void)) {
         deleteAccountRouteWithRequestBuilder(accountId: accountId, routeId: routeId).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -130,9 +131,9 @@ open class RoutesAPI: APIBase {
 
 
     /**
-     
-     - DELETE /accounts/{accountId}/routes/{routeId}
-     - 
+     Delete a route from the account.
+     - DELETE /accounts/{account_id}/routes/{route_id}
+     - Delete a route from the account. See Intro to Routes for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -143,25 +144,25 @@ open class RoutesAPI: APIBase {
      - parameter accountId: (path) Account ID 
      - parameter routeId: (path) Route ID 
 
-     - returns: RequestBuilder<DeleteRoute> 
+     - returns: RequestBuilder<DeleteEntry> 
      */
-    open class func deleteAccountRouteWithRequestBuilder(accountId: Int32, routeId: Int32) -> RequestBuilder<DeleteRoute> {
-        var path = "/accounts/{accountId}/routes/{routeId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{routeId}", with: "\(routeId)", options: .literal, range: nil)
+    open class func deleteAccountRouteWithRequestBuilder(accountId: Int32, routeId: Int32) -> RequestBuilder<DeleteEntry> {
+        var path = "/accounts/{account_id}/routes/{route_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{route_id}", with: "\(routeId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
 
 
-        let requestBuilder: RequestBuilder<DeleteRoute>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<DeleteEntry>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-     Show details of an individual route
+     Show details of an individual route.
      
      - parameter accountId: (path) Account ID 
      - parameter routeId: (path) Route ID 
@@ -175,31 +176,31 @@ open class RoutesAPI: APIBase {
 
 
     /**
-     Show details of an individual route
-     - GET /accounts/{accountId}/routes/{routeId}
-     - This service shows the details of an individual route.
+     Show details of an individual route.
+     - GET /accounts/{account_id}/routes/{route_id}
+     - Show details of an individual route. See Intro to Routes for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "extension" : {
-    "extension" : 123,
+    "extension" : 1,
     "name" : "aeiou",
-    "id" : 123
+    "id" : 6
   },
   "name" : "aeiou",
   "rules" : [ {
     "filter" : {
       "schedule" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 5
       },
       "contact" : {
         "prefix" : "aeiou",
         "nickname" : "aeiou",
         "last_name" : "aeiou",
         "company" : "aeiou",
-        "id" : 123,
+        "id" : 5,
         "middle_name" : "aeiou",
         "suffix" : "aeiou",
         "first_name" : "aeiou"
@@ -207,43 +208,43 @@ open class RoutesAPI: APIBase {
       "type" : "aeiou",
       "group" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 2
       }
     },
     "actions" : [ {
-      "duration" : 123,
+      "duration" : 3,
       "extension" : "",
       "hold_music" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 9
       },
       "greeting" : "",
       "action" : "aeiou",
       "menu" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 2
       },
       "trunk" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 7
       },
       "items" : [ {
         "number" : "aeiou",
         "extension" : "",
-        "screening" : true,
-        "caller_id" : "aeiou",
+        "screening" : false,
+        "caller_id" : "calling_number",
         "voice_tag" : "aeiou",
         "distinctive_ring" : "aeiou",
         "type" : "aeiou"
       } ],
-      "timeout" : 123,
+      "timeout" : 7,
       "queue" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 4
       }
     } ]
   } ],
-  "id" : 123
+  "id" : 0
 }}]
      
      - parameter accountId: (path) Account ID 
@@ -252,9 +253,9 @@ open class RoutesAPI: APIBase {
      - returns: RequestBuilder<RouteFull> 
      */
     open class func getAccountRouteWithRequestBuilder(accountId: Int32, routeId: Int32) -> RequestBuilder<RouteFull> {
-        var path = "/accounts/{accountId}/routes/{routeId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{routeId}", with: "\(routeId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/routes/{route_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{route_id}", with: "\(routeId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -267,7 +268,7 @@ open class RoutesAPI: APIBase {
     }
 
     /**
-     Get a list of routes for an account
+     Get a list of routes for an account.
      
      - parameter accountId: (path) Account ID 
      - parameter filtersId: (query) ID filter (optional)
@@ -287,16 +288,16 @@ open class RoutesAPI: APIBase {
 
 
     /**
-     Get a list of routes for an account
-     - GET /accounts/{accountId}/routes
-     - See Intro to Routes for more info on the properties.
+     Get a list of routes for an account.
+     - GET /accounts/{account_id}/routes
+     - Get a list of routes for an account. See Intro to Routes for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "name" : "aeiou",
     "id" : "aeiou"
@@ -307,23 +308,23 @@ open class RoutesAPI: APIBase {
   },
   "items" : [ {
     "extension" : {
-      "extension" : 123,
+      "extension" : 2,
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     },
     "name" : "aeiou",
     "rules" : [ {
       "filter" : {
         "schedule" : {
           "name" : "aeiou",
-          "id" : 123
+          "id" : 7
         },
         "contact" : {
           "prefix" : "aeiou",
           "nickname" : "aeiou",
           "last_name" : "aeiou",
           "company" : "aeiou",
-          "id" : 123,
+          "id" : 9,
           "middle_name" : "aeiou",
           "suffix" : "aeiou",
           "first_name" : "aeiou"
@@ -331,43 +332,43 @@ open class RoutesAPI: APIBase {
         "type" : "aeiou",
         "group" : {
           "name" : "aeiou",
-          "id" : 123
+          "id" : 3
         }
       },
       "actions" : [ {
-        "duration" : 123,
+        "duration" : 7,
         "extension" : "",
         "hold_music" : {
           "name" : "aeiou",
-          "id" : 123
+          "id" : 4
         },
         "greeting" : "",
         "action" : "aeiou",
         "menu" : {
           "name" : "aeiou",
-          "id" : 123
+          "id" : 1
         },
         "trunk" : {
           "name" : "aeiou",
-          "id" : 123
+          "id" : 1
         },
         "items" : [ {
           "number" : "aeiou",
           "extension" : "",
-          "screening" : true,
-          "caller_id" : "aeiou",
+          "screening" : false,
+          "caller_id" : "calling_number",
           "voice_tag" : "aeiou",
           "distinctive_ring" : "aeiou",
           "type" : "aeiou"
         } ],
-        "timeout" : 123,
+        "timeout" : 2,
         "queue" : {
           "name" : "aeiou",
-          "id" : 123
+          "id" : 1
         }
       } ]
     } ],
-    "id" : 123
+    "id" : 5
   } ]
 }}]
      
@@ -383,8 +384,8 @@ open class RoutesAPI: APIBase {
      - returns: RequestBuilder<ListRoutes> 
      */
     open class func listAccountRoutesWithRequestBuilder(accountId: Int32, filtersId: [String]? = nil, filtersName: [String]? = nil, sortId: String? = nil, sortName: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListRoutes> {
-        var path = "/accounts/{accountId}/routes"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/routes"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -406,7 +407,7 @@ open class RoutesAPI: APIBase {
     }
 
     /**
-     
+     Update the information of a route.
      
      - parameter accountId: (path) Account ID 
      - parameter routeId: (path) Route ID 
@@ -421,31 +422,31 @@ open class RoutesAPI: APIBase {
 
 
     /**
-     
-     - PUT /accounts/{accountId}/routes/{routeId}
-     - For more on the input fields, see Intro to Routes.
+     Update the information of a route.
+     - PUT /accounts/{account_id}/routes/{route_id}
+     - Update the information of a route. See Intro to Routes for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "extension" : {
-    "extension" : 123,
+    "extension" : 1,
     "name" : "aeiou",
-    "id" : 123
+    "id" : 6
   },
   "name" : "aeiou",
   "rules" : [ {
     "filter" : {
       "schedule" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 5
       },
       "contact" : {
         "prefix" : "aeiou",
         "nickname" : "aeiou",
         "last_name" : "aeiou",
         "company" : "aeiou",
-        "id" : 123,
+        "id" : 5,
         "middle_name" : "aeiou",
         "suffix" : "aeiou",
         "first_name" : "aeiou"
@@ -453,43 +454,43 @@ open class RoutesAPI: APIBase {
       "type" : "aeiou",
       "group" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 2
       }
     },
     "actions" : [ {
-      "duration" : 123,
+      "duration" : 3,
       "extension" : "",
       "hold_music" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 9
       },
       "greeting" : "",
       "action" : "aeiou",
       "menu" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 2
       },
       "trunk" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 7
       },
       "items" : [ {
         "number" : "aeiou",
         "extension" : "",
-        "screening" : true,
-        "caller_id" : "aeiou",
+        "screening" : false,
+        "caller_id" : "calling_number",
         "voice_tag" : "aeiou",
         "distinctive_ring" : "aeiou",
         "type" : "aeiou"
       } ],
-      "timeout" : 123,
+      "timeout" : 7,
       "queue" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 4
       }
     } ]
   } ],
-  "id" : 123
+  "id" : 0
 }}]
      
      - parameter accountId: (path) Account ID 
@@ -499,9 +500,9 @@ open class RoutesAPI: APIBase {
      - returns: RequestBuilder<RouteFull> 
      */
     open class func replaceAccountRouteWithRequestBuilder(accountId: Int32, routeId: Int32, data: CreateRouteParams? = nil) -> RequestBuilder<RouteFull> {
-        var path = "/accounts/{accountId}/routes/{routeId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{routeId}", with: "\(routeId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/routes/{route_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{route_id}", with: "\(routeId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 

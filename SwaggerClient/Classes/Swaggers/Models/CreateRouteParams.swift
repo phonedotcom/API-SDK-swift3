@@ -9,6 +9,7 @@ import Foundation
 
 
 open class CreateRouteParams: JSONEncodable {
+
     /** Name */
     public var name: String?
     /** Rule Sets */
@@ -24,6 +25,7 @@ open class CreateRouteParams: JSONEncodable {
         nillableDictionary["name"] = self.name
         nillableDictionary["rules"] = self.rules?.encodeToJSON()
         nillableDictionary["extension"] = self._extension
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

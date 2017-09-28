@@ -9,6 +9,7 @@ import Foundation
 
 
 open class ListCallerIds: JSONEncodable {
+
     public var filters: FilterNameNumberArray?
     public var sort: SortNameNumber?
     public var total: Int32?
@@ -27,6 +28,7 @@ open class ListCallerIds: JSONEncodable {
         nillableDictionary["offset"] = self.offset?.encodeToJSON()
         nillableDictionary["limit"] = self.limit?.encodeToJSON()
         nillableDictionary["items"] = self.items?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

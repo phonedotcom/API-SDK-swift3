@@ -9,6 +9,7 @@ import Foundation
 
 
 open class FilterIdArray: JSONEncodable {
+
     public var id: String?
 
     public init() {}
@@ -17,6 +18,7 @@ open class FilterIdArray: JSONEncodable {
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["id"] = self.id
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

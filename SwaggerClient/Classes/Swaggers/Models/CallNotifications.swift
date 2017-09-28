@@ -10,6 +10,7 @@ import Foundation
 
 /** Call Notifications Object or NULL */
 open class CallNotifications: JSONEncodable {
+
     /** Array of email addresses */
     public var emails: [String]?
     /** A phone number capable of receiving SMS messages */
@@ -22,6 +23,7 @@ open class CallNotifications: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["emails"] = self.emails?.encodeToJSON()
         nillableDictionary["sms"] = self.sms
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

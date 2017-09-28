@@ -9,6 +9,7 @@ import Foundation
 
 
 open class FilterIdGroupIdUpdatedAtArray: JSONEncodable {
+
     public var id: String?
     public var groupId: String?
     public var updatedAt: String?
@@ -21,6 +22,7 @@ open class FilterIdGroupIdUpdatedAtArray: JSONEncodable {
         nillableDictionary["id"] = self.id
         nillableDictionary["group_id"] = self.groupId
         nillableDictionary["updated_at"] = self.updatedAt
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

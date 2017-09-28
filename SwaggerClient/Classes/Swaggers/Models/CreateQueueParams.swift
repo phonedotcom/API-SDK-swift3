@@ -9,6 +9,7 @@ import Foundation
 
 
 open class CreateQueueParams: JSONEncodable {
+
     /** Name of queue */
     public var name: String?
     /** Recording lookup object */
@@ -36,6 +37,7 @@ open class CreateQueueParams: JSONEncodable {
         nillableDictionary["caller_id_type"] = self.callerIdType
         nillableDictionary["ring_time"] = self.ringTime?.encodeToJSON()
         nillableDictionary["members"] = self.members?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

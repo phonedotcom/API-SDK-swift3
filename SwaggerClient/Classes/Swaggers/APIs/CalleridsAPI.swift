@@ -5,13 +5,14 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
 
 open class CalleridsAPI: APIBase {
     /**
-     Show the Caller ID options a given extension can use
+     Show the Caller ID options a given extension can use.
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
@@ -32,16 +33,16 @@ open class CalleridsAPI: APIBase {
 
 
     /**
-     Show the Caller ID options a given extension can use
-     - GET /accounts/{accountId}/extensions/{extensionId}/caller-ids
-     - Get Caller ID
+     Show the Caller ID options a given extension can use.
+     - GET /accounts/{account_id}/extensions/{extension_id}/caller-ids
+     - Show the Caller ID options a given extension can use. See Intro to Caller IDs for more on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "number" : "aeiou",
     "name" : "aeiou"
@@ -70,9 +71,9 @@ open class CalleridsAPI: APIBase {
      - returns: RequestBuilder<ListCallerIds> 
      */
     open class func getCallerIdsWithRequestBuilder(accountId: Int32, extensionId: Int32, filtersNumber: [String]? = nil, filtersName: [String]? = nil, sortNumber: String? = nil, sortName: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListCallerIds> {
-        var path = "/accounts/{accountId}/extensions/{extensionId}/caller-ids"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{extensionId}", with: "\(extensionId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/extensions/{extension_id}/caller-ids"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{extension_id}", with: "\(extensionId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 

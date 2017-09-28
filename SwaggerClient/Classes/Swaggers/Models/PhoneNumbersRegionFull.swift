@@ -10,6 +10,7 @@ import Foundation
 
 /** The Region Object may include any of several fields describing the group, as well as the quantity of phone numbers available in that group. Here are the properties: */
 open class PhoneNumbersRegionFull: JSONEncodable {
+
     /** Optional. Integer representing the international calling code for the phone number&#39;s country. */
     public var countryCode: String?
     /** Optional. Area Code, for North American phone numbers. */
@@ -40,6 +41,7 @@ open class PhoneNumbersRegionFull: JSONEncodable {
         nillableDictionary["province_postal_code"] = self.provincePostalCode
         nillableDictionary["country_postal_code"] = self.countryPostalCode
         nillableDictionary["quantity"] = self.quantity?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

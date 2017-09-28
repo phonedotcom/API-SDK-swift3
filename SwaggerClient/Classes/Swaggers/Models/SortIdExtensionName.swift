@@ -9,6 +9,7 @@ import Foundation
 
 
 open class SortIdExtensionName: JSONEncodable {
+
     public var id: String?
     public var _extension: String?
     public var name: String?
@@ -21,6 +22,7 @@ open class SortIdExtensionName: JSONEncodable {
         nillableDictionary["id"] = self.id
         nillableDictionary["extension"] = self._extension
         nillableDictionary["name"] = self.name
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

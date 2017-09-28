@@ -9,10 +9,11 @@ import Foundation
 
 
 open class ReplaceMenuParams: JSONEncodable {
+
     public var name: String?
     public var greeting: Any?
-    public var invalidKeypress: Any?
-    public var allowExtensionDial: Bool?
+    public var keypressError: Any?
+    public var allowExtensionDial: String?
     public var keypressWaitTime: Int32?
     public var timeoutHandler: Any?
     public var options: [Any]?
@@ -24,11 +25,12 @@ open class ReplaceMenuParams: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["name"] = self.name
         nillableDictionary["greeting"] = self.greeting
-        nillableDictionary["invalid_keypress"] = self.invalidKeypress
+        nillableDictionary["keypress_error"] = self.keypressError
         nillableDictionary["allow_extension_dial"] = self.allowExtensionDial
         nillableDictionary["keypress_wait_time"] = self.keypressWaitTime?.encodeToJSON()
         nillableDictionary["timeout_handler"] = self.timeoutHandler
         nillableDictionary["options"] = self.options?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

@@ -9,6 +9,7 @@ import Foundation
 
 
 open class AddressListContacts: JSONEncodable {
+
     /** Address type, one of: home or business. Default is home. */
     public var type: String?
     /** House number and street name, including apartment, suite, etc. */
@@ -33,6 +34,7 @@ open class AddressListContacts: JSONEncodable {
         nillableDictionary["state"] = self.state
         nillableDictionary["zip"] = self.zip
         nillableDictionary["country"] = self.country
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

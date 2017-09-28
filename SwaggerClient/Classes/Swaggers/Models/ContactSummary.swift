@@ -10,6 +10,7 @@ import Foundation
 
 /** The Contact Summary Object is used to briefly represent a contact from your address book. It can be seen in several places throughout this API. Here are the properties: */
 open class ContactSummary: JSONEncodable {
+
     /** Integer ID. Read-only. */
     public var id: Int32?
     /** Salutation, such as Mr, Mrs, or Dr */
@@ -40,6 +41,7 @@ open class ContactSummary: JSONEncodable {
         nillableDictionary["suffix"] = self.suffix
         nillableDictionary["nickname"] = self.nickname
         nillableDictionary["company"] = self.company
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

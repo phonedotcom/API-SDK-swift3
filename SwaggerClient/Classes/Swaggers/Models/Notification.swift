@@ -8,7 +8,9 @@
 import Foundation
 
 
+/** The Call Notifications object configures the recipient(s) of notifications when calls are received to this extension. */
 open class Notification: JSONEncodable {
+
     /** Array of email addresses */
     public var emails: [String]?
     /** Phone number capable of receiving SMS messages */
@@ -21,6 +23,7 @@ open class Notification: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["emails"] = self.emails?.encodeToJSON()
         nillableDictionary["sms"] = self.sms
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

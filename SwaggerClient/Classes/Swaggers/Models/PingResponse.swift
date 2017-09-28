@@ -10,6 +10,7 @@ import Foundation
 
 /** The ping response object. */
 open class PingResponse: JSONEncodable {
+
     public var datetime: String?
     public var remoteIp: String?
     public var timestamp: Int32?
@@ -24,6 +25,7 @@ open class PingResponse: JSONEncodable {
         nillableDictionary["remote_ip"] = self.remoteIp
         nillableDictionary["timestamp"] = self.timestamp?.encodeToJSON()
         nillableDictionary["user_agent"] = self.userAgent
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

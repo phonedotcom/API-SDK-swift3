@@ -9,6 +9,7 @@ import Foundation
 
 
 open class CreateContactParams: JSONEncodable {
+
     /** First Name */
     public var firstName: String?
     /** Middle Name */
@@ -34,11 +35,11 @@ open class CreateContactParams: JSONEncodable {
     /** Job Title */
     public var jobTitle: String?
     /** Email Addresses */
-    public var emails: [Any]?
+    public var emails: [Email]?
     /** Phone Numbers */
-    public var phoneNumbers: [Any]?
+    public var phoneNumbers: [PhoneNumberContact]?
     /** Addresses */
-    public var addresses: [Any]?
+    public var addresses: [AddressListContacts]?
     /** Contact Group */
     public var group: Any?
 
@@ -63,6 +64,7 @@ open class CreateContactParams: JSONEncodable {
         nillableDictionary["phone_numbers"] = self.phoneNumbers?.encodeToJSON()
         nillableDictionary["addresses"] = self.addresses?.encodeToJSON()
         nillableDictionary["group"] = self.group
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

@@ -10,6 +10,7 @@ import Foundation
 
 /** The Full Schedule Object is identical to the Schedule Summary Object. See above for details. */
 open class ScheduleFull: JSONEncodable {
+
     /** Integer Schedule ID. Read-only. */
     public var id: Int32?
     /** Name */
@@ -22,6 +23,7 @@ open class ScheduleFull: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["id"] = self.id?.encodeToJSON()
         nillableDictionary["name"] = self.name
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

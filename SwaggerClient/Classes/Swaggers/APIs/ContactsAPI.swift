@@ -5,13 +5,14 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
 
 open class ContactsAPI: APIBase {
     /**
-     Add a new address book contact for an extension
+     Add a new address book contact for an extension.
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
@@ -26,9 +27,9 @@ open class ContactsAPI: APIBase {
 
 
     /**
-     Add a new address book contact for an extension
-     - POST /accounts/{accountId}/extensions/{extensionId}/contacts
-     - For more on the input fields, see Account Contacts.
+     Add a new address book contact for an extension.
+     - POST /accounts/{account_id}/extensions/{extension_id}/contacts
+     - Add a new address book contact for an extension. See Account Contacts for more info on the fields in each item.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -43,7 +44,7 @@ open class ContactsAPI: APIBase {
   } ],
   "prefix" : "aeiou",
   "last_name" : "aeiou",
-  "created_at" : 123,
+  "created_at" : 1,
   "middle_name" : "aeiou",
   "suffix" : "aeiou",
   "emails" : [ {
@@ -57,17 +58,17 @@ open class ContactsAPI: APIBase {
   } ],
   "phonetic_first_name" : "aeiou",
   "phonetic_middle_name" : "aeiou",
-  "updated_at" : 123,
+  "updated_at" : 5,
   "nickname" : "aeiou",
   "company" : "aeiou",
-  "id" : 123,
+  "id" : 0,
   "department" : "aeiou",
   "first_name" : "aeiou",
   "phonetic_last_name" : "aeiou",
   "job_title" : "aeiou",
   "group" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 6
   }
 }}]
      
@@ -78,9 +79,9 @@ open class ContactsAPI: APIBase {
      - returns: RequestBuilder<ContactFull> 
      */
     open class func createAccountExtensionContactWithRequestBuilder(accountId: Int32, extensionId: Int32, data: CreateContactParams? = nil) -> RequestBuilder<ContactFull> {
-        var path = "/accounts/{accountId}/extensions/{extensionId}/contacts"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{extensionId}", with: "\(extensionId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/extensions/{extension_id}/contacts"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{extension_id}", with: "\(extensionId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 
@@ -93,14 +94,14 @@ open class ContactsAPI: APIBase {
     }
 
     /**
-     
+     Delete a contact from the address book.
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
      - parameter contactId: (path) Contact ID 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func deleteAccountExtensionContact(accountId: Int32, extensionId: Int32, contactId: Int32, completion: @escaping ((_ data: DeleteContact?,_ error: Error?) -> Void)) {
+    open class func deleteAccountExtensionContact(accountId: Int32, extensionId: Int32, contactId: Int32, completion: @escaping ((_ data: DeleteEntry?,_ error: Error?) -> Void)) {
         deleteAccountExtensionContactWithRequestBuilder(accountId: accountId, extensionId: extensionId, contactId: contactId).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -108,9 +109,9 @@ open class ContactsAPI: APIBase {
 
 
     /**
-     
-     - DELETE /accounts/{accountId}/extensions/{extensionId}/contacts/{contactId}
-     - 
+     Delete a contact from the address book.
+     - DELETE /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id}
+     - Delete a contact from the address book. See Account Contacts for more info on the fields in each item.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -122,26 +123,26 @@ open class ContactsAPI: APIBase {
      - parameter extensionId: (path) Extension ID 
      - parameter contactId: (path) Contact ID 
 
-     - returns: RequestBuilder<DeleteContact> 
+     - returns: RequestBuilder<DeleteEntry> 
      */
-    open class func deleteAccountExtensionContactWithRequestBuilder(accountId: Int32, extensionId: Int32, contactId: Int32) -> RequestBuilder<DeleteContact> {
-        var path = "/accounts/{accountId}/extensions/{extensionId}/contacts/{contactId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{extensionId}", with: "\(extensionId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{contactId}", with: "\(contactId)", options: .literal, range: nil)
+    open class func deleteAccountExtensionContactWithRequestBuilder(accountId: Int32, extensionId: Int32, contactId: Int32) -> RequestBuilder<DeleteEntry> {
+        var path = "/accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{extension_id}", with: "\(extensionId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{contact_id}", with: "\(contactId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
 
 
-        let requestBuilder: RequestBuilder<DeleteContact>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<DeleteEntry>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-     Retrieve the details of an address book contact
+     Retrieve the details of an address book contact.
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
@@ -156,9 +157,9 @@ open class ContactsAPI: APIBase {
 
 
     /**
-     Retrieve the details of an address book contact
-     - GET /accounts/{accountId}/extensions/{extensionId}/contacts/{contactId}
-     - For more info on the fields shown, see Account Contacts.
+     Retrieve the details of an address book contact.
+     - GET /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id}
+     - Retrieve the details of an address book contact. See Account Contacts for more info on the fields in each item.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -173,7 +174,7 @@ open class ContactsAPI: APIBase {
   } ],
   "prefix" : "aeiou",
   "last_name" : "aeiou",
-  "created_at" : 123,
+  "created_at" : 1,
   "middle_name" : "aeiou",
   "suffix" : "aeiou",
   "emails" : [ {
@@ -187,17 +188,17 @@ open class ContactsAPI: APIBase {
   } ],
   "phonetic_first_name" : "aeiou",
   "phonetic_middle_name" : "aeiou",
-  "updated_at" : 123,
+  "updated_at" : 5,
   "nickname" : "aeiou",
   "company" : "aeiou",
-  "id" : 123,
+  "id" : 0,
   "department" : "aeiou",
   "first_name" : "aeiou",
   "phonetic_last_name" : "aeiou",
   "job_title" : "aeiou",
   "group" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 6
   }
 }}]
      
@@ -208,10 +209,10 @@ open class ContactsAPI: APIBase {
      - returns: RequestBuilder<ContactFull> 
      */
     open class func getAccountExtensionContactWithRequestBuilder(accountId: Int32, extensionId: Int32, contactId: Int32) -> RequestBuilder<ContactFull> {
-        var path = "/accounts/{accountId}/extensions/{extensionId}/contacts/{contactId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{extensionId}", with: "\(extensionId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{contactId}", with: "\(contactId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{extension_id}", with: "\(extensionId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{contact_id}", with: "\(contactId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -224,7 +225,7 @@ open class ContactsAPI: APIBase {
     }
 
     /**
-     Show a list of address book contacts
+     Show the Caller ID options a given extension can use.
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
@@ -246,16 +247,16 @@ open class ContactsAPI: APIBase {
 
 
     /**
-     Show a list of address book contacts
-     - GET /accounts/{accountId}/extensions/{extensionId}/contacts
-     - See Account Contacts for more info on the fields in each item.
+     Show the Caller ID options a given extension can use.
+     - GET /accounts/{account_id}/extensions/{extension_id}/contacts
+     - Show the Caller ID options a given extension can use. See Intro to Caller IDs for more on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "updated_at" : "aeiou",
     "group_id" : "aeiou",
@@ -276,7 +277,7 @@ open class ContactsAPI: APIBase {
     } ],
     "prefix" : "aeiou",
     "last_name" : "aeiou",
-    "created_at" : 123,
+    "created_at" : 2,
     "middle_name" : "aeiou",
     "suffix" : "aeiou",
     "emails" : [ {
@@ -290,17 +291,17 @@ open class ContactsAPI: APIBase {
     } ],
     "phonetic_first_name" : "aeiou",
     "phonetic_middle_name" : "aeiou",
-    "updated_at" : 123,
+    "updated_at" : 7,
     "nickname" : "aeiou",
     "company" : "aeiou",
-    "id" : 123,
+    "id" : 5,
     "department" : "aeiou",
     "first_name" : "aeiou",
     "phonetic_last_name" : "aeiou",
     "job_title" : "aeiou",
     "group" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     }
   } ]
 }}]
@@ -319,9 +320,9 @@ open class ContactsAPI: APIBase {
      - returns: RequestBuilder<ListContacts> 
      */
     open class func listAccountExtensionContactsWithRequestBuilder(accountId: Int32, extensionId: Int32, filtersId: [String]? = nil, filtersGroupId: [String]? = nil, filtersUpdatedAt: [String]? = nil, sortId: String? = nil, sortUpdatedAt: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListContacts> {
-        var path = "/accounts/{accountId}/extensions/{extensionId}/contacts"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{extensionId}", with: "\(extensionId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/extensions/{extension_id}/contacts"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{extension_id}", with: "\(extensionId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -344,7 +345,7 @@ open class ContactsAPI: APIBase {
     }
 
     /**
-     
+     Update the info of a contact in the address book.
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
@@ -360,9 +361,9 @@ open class ContactsAPI: APIBase {
 
 
     /**
-     
-     - PUT /accounts/{accountId}/extensions/{extensionId}/contacts/{contactId}
-     - For more on the input fields, see Account Contacts.
+     Update the info of a contact in the address book.
+     - PUT /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id}
+     - Update the info of a contact in the address book. See Account Contacts for more info on the fields in each item.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -377,7 +378,7 @@ open class ContactsAPI: APIBase {
   } ],
   "prefix" : "aeiou",
   "last_name" : "aeiou",
-  "created_at" : 123,
+  "created_at" : 1,
   "middle_name" : "aeiou",
   "suffix" : "aeiou",
   "emails" : [ {
@@ -391,17 +392,17 @@ open class ContactsAPI: APIBase {
   } ],
   "phonetic_first_name" : "aeiou",
   "phonetic_middle_name" : "aeiou",
-  "updated_at" : 123,
+  "updated_at" : 5,
   "nickname" : "aeiou",
   "company" : "aeiou",
-  "id" : 123,
+  "id" : 0,
   "department" : "aeiou",
   "first_name" : "aeiou",
   "phonetic_last_name" : "aeiou",
   "job_title" : "aeiou",
   "group" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 6
   }
 }}]
      
@@ -413,10 +414,10 @@ open class ContactsAPI: APIBase {
      - returns: RequestBuilder<ContactFull> 
      */
     open class func replaceAccountExtensionContactWithRequestBuilder(accountId: Int32, extensionId: Int32, contactId: Int32, data: CreateContactParams? = nil) -> RequestBuilder<ContactFull> {
-        var path = "/accounts/{accountId}/extensions/{extensionId}/contacts/{contactId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{extensionId}", with: "\(extensionId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{contactId}", with: "\(contactId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{extension_id}", with: "\(extensionId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{contact_id}", with: "\(contactId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 

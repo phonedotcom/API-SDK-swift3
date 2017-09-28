@@ -10,6 +10,7 @@ import Foundation
 
 /** Array of Forward Item Objects. See below for details. Required. */
 open class RuleSetForwardItem: JSONEncodable {
+
     /** Required. Must equal phone_number or extension. */
     public var type: String?
     /** Required if type &#x3D; \&quot;extension\&quot;. Extension that callers should be directed to. Output is an Extension Summary Object. Input must be an Extension Lookup Object. */
@@ -37,6 +38,7 @@ open class RuleSetForwardItem: JSONEncodable {
         nillableDictionary["caller_id"] = self.callerId
         nillableDictionary["voice_tag"] = self.voiceTag
         nillableDictionary["distinctive_ring"] = self.distinctiveRing
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

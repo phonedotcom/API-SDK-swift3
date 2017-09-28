@@ -9,6 +9,7 @@ import Foundation
 
 
 open class ContactAccount: JSONEncodable {
+
     /** Name. Required. */
     public var name: String?
     /** Company name */
@@ -35,6 +36,7 @@ open class ContactAccount: JSONEncodable {
         nillableDictionary["fax"] = self.fax
         nillableDictionary["primary_email"] = self.primaryEmail
         nillableDictionary["alternate_email"] = self.alternateEmail
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

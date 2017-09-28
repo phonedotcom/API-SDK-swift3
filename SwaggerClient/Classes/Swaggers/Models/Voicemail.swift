@@ -10,6 +10,7 @@ import Foundation
 
 /** Voicemail Object. See below for details. */
 open class Voicemail: JSONEncodable {
+
     /** Whether voicemail is enabled. Boolean. */
     public var enabled: Bool?
     /** Password for accessing voicemail box. Must be digits only. */
@@ -33,6 +34,7 @@ open class Voicemail: JSONEncodable {
         nillableDictionary["attachments"] = self.attachments
         nillableDictionary["notifications"] = self.notifications?.encodeToJSON()
         nillableDictionary["transcription"] = self.transcription
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

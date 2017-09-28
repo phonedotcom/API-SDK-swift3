@@ -5,13 +5,14 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
 
 open class DevicesAPI: APIBase {
     /**
-     Register a generic VoIP device
+     Register a generic VoIP device.
      
      - parameter accountId: (path) Account ID 
      - parameter data: (body) Device data (optional)
@@ -25,28 +26,28 @@ open class DevicesAPI: APIBase {
 
 
     /**
-     Register a generic VoIP device
-     - POST /accounts/{accountId}/devices
-     - 
+     Register a generic VoIP device.
+     - POST /accounts/{account_id}/devices
+     - Register a generic VoIP device. See Devices for more detail.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "sip_authentication" : {
     "password" : "aeiou",
-    "port" : 123,
+    "port" : 6,
     "host" : "aeiou",
     "username" : "aeiou"
   },
   "name" : "aeiou",
-  "id" : 123,
+  "id" : 0,
   "lines" : [ {
     "extension" : {
-      "extension" : 123,
+      "extension" : 5,
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     },
-    "line" : 123
+    "line" : 1
   } ]
 }}]
      
@@ -56,8 +57,8 @@ open class DevicesAPI: APIBase {
      - returns: RequestBuilder<DeviceFull> 
      */
     open class func createAccountDeviceWithRequestBuilder(accountId: Int32, data: CreateDeviceParams? = nil) -> RequestBuilder<DeviceFull> {
-        var path = "/accounts/{accountId}/devices"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/devices"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 
@@ -70,7 +71,52 @@ open class DevicesAPI: APIBase {
     }
 
     /**
-     Show details of an individual VoIP device
+     Delete a VoIP device.
+     
+     - parameter accountId: (path) Account ID 
+     - parameter deviceId: (path) Device ID 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func deleteAccountDevice(accountId: Int32, deviceId: Int32, completion: @escaping ((_ data: DeleteEntry?,_ error: Error?) -> Void)) {
+        deleteAccountDeviceWithRequestBuilder(accountId: accountId, deviceId: deviceId).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Delete a VoIP device.
+     - DELETE /accounts/{account_id}/devices/{device_id}
+     - Delete a VoIP device. See Devices for more detail.
+     - API Key:
+       - type: apiKey Authorization 
+       - name: apiKey
+     - examples: [{contentType=application/json, example={
+  "success" : true
+}}]
+     
+     - parameter accountId: (path) Account ID 
+     - parameter deviceId: (path) Device ID 
+
+     - returns: RequestBuilder<DeleteEntry> 
+     */
+    open class func deleteAccountDeviceWithRequestBuilder(accountId: Int32, deviceId: Int32) -> RequestBuilder<DeleteEntry> {
+        var path = "/accounts/{account_id}/devices/{device_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{device_id}", with: "\(deviceId)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<DeleteEntry>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Show details of an individual VoIP device.
      
      - parameter accountId: (path) Account ID 
      - parameter deviceId: (path) Device ID 
@@ -84,28 +130,28 @@ open class DevicesAPI: APIBase {
 
 
     /**
-     Show details of an individual VoIP device
-     - GET /accounts/{accountId}/devices/{deviceId}
-     - 
+     Show details of an individual VoIP device.
+     - GET /accounts/{account_id}/devices/{device_id}
+     - Show details of an individual VoIP device. See Devices for more detail.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "sip_authentication" : {
     "password" : "aeiou",
-    "port" : 123,
+    "port" : 6,
     "host" : "aeiou",
     "username" : "aeiou"
   },
   "name" : "aeiou",
-  "id" : 123,
+  "id" : 0,
   "lines" : [ {
     "extension" : {
-      "extension" : 123,
+      "extension" : 5,
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     },
-    "line" : 123
+    "line" : 1
   } ]
 }}]
      
@@ -115,9 +161,9 @@ open class DevicesAPI: APIBase {
      - returns: RequestBuilder<DeviceFull> 
      */
     open class func getAccountDeviceWithRequestBuilder(accountId: Int32, deviceId: Int32) -> RequestBuilder<DeviceFull> {
-        var path = "/accounts/{accountId}/devices/{deviceId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{deviceId}", with: "\(deviceId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/devices/{device_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{device_id}", with: "\(deviceId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -130,7 +176,7 @@ open class DevicesAPI: APIBase {
     }
 
     /**
-     Get a list of VoIP devices associated with your account
+     Get a list of VoIP devices associated with your account.
      
      - parameter accountId: (path) Account ID 
      - parameter filtersId: (query) ID filter (optional)
@@ -150,16 +196,16 @@ open class DevicesAPI: APIBase {
 
 
     /**
-     Get a list of VoIP devices associated with your account
-     - GET /accounts/{accountId}/devices
-     - 
+     Get a list of VoIP devices associated with your account.
+     - GET /accounts/{account_id}/devices
+     - Get a list of VoIP devices associated with your account. See Devices for more detail.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "name" : "aeiou",
     "id" : "aeiou"
@@ -171,19 +217,19 @@ open class DevicesAPI: APIBase {
   "items" : [ {
     "sip_authentication" : {
       "password" : "aeiou",
-      "port" : 123,
+      "port" : 5,
       "host" : "aeiou",
       "username" : "aeiou"
     },
     "name" : "aeiou",
-    "id" : 123,
+    "id" : 5,
     "lines" : [ {
       "extension" : {
-        "extension" : 123,
+        "extension" : 9,
         "name" : "aeiou",
-        "id" : 123
+        "id" : 7
       },
-      "line" : 123
+      "line" : 2
     } ]
   } ]
 }}]
@@ -200,8 +246,8 @@ open class DevicesAPI: APIBase {
      - returns: RequestBuilder<ListDevices> 
      */
     open class func listAccountDevicesWithRequestBuilder(accountId: Int32, filtersId: [String]? = nil, filtersName: [String]? = nil, sortId: String? = nil, sortName: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListDevices> {
-        var path = "/accounts/{accountId}/devices"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/devices"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -223,7 +269,7 @@ open class DevicesAPI: APIBase {
     }
 
     /**
-     Update the settings for an individual VoIP device
+     Update the details of an individual VoIP device.
      
      - parameter accountId: (path) Account ID 
      - parameter deviceId: (path) Device ID 
@@ -238,28 +284,28 @@ open class DevicesAPI: APIBase {
 
 
     /**
-     Update the settings for an individual VoIP device
-     - PUT /accounts/{accountId}/devices/{deviceId}
-     - 
+     Update the details of an individual VoIP device.
+     - PUT /accounts/{account_id}/devices/{device_id}
+     - Update the details of an individual VoIP device. See Devices for more detail.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "sip_authentication" : {
     "password" : "aeiou",
-    "port" : 123,
+    "port" : 6,
     "host" : "aeiou",
     "username" : "aeiou"
   },
   "name" : "aeiou",
-  "id" : 123,
+  "id" : 0,
   "lines" : [ {
     "extension" : {
-      "extension" : 123,
+      "extension" : 5,
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     },
-    "line" : 123
+    "line" : 1
   } ]
 }}]
      
@@ -270,9 +316,9 @@ open class DevicesAPI: APIBase {
      - returns: RequestBuilder<DeviceFull> 
      */
     open class func replaceAccountDeviceWithRequestBuilder(accountId: Int32, deviceId: Int32, data: CreateDeviceParams? = nil) -> RequestBuilder<DeviceFull> {
-        var path = "/accounts/{accountId}/devices/{deviceId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{deviceId}", with: "\(deviceId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/devices/{device_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{device_id}", with: "\(deviceId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 

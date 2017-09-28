@@ -10,6 +10,7 @@ import Foundation
 
 /** A SIP Authentication Properties Object. See below for details. Read-only. */
 open class SipAuthentication: JSONEncodable {
+
     /** Hostname */
     public var host: String?
     /** Port number */
@@ -28,6 +29,7 @@ open class SipAuthentication: JSONEncodable {
         nillableDictionary["port"] = self.port?.encodeToJSON()
         nillableDictionary["username"] = self.username
         nillableDictionary["password"] = self.password
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

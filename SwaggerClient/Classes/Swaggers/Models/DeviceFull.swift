@@ -10,6 +10,7 @@ import Foundation
 
 /** The Full Device Object includes the properties in the Device Summary Object, along with the following: */
 open class DeviceFull: JSONEncodable {
+
     /** ID */
     public var id: Int32?
     /** User-supplied name, otherwise NULL */
@@ -27,6 +28,7 @@ open class DeviceFull: JSONEncodable {
         nillableDictionary["name"] = self.name
         nillableDictionary["sip_authentication"] = self.sipAuthentication?.encodeToJSON()
         nillableDictionary["lines"] = self.lines?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

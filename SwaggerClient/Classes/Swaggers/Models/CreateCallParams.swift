@@ -9,6 +9,7 @@ import Foundation
 
 
 open class CreateCallParams: JSONEncodable {
+
     /** Caller phone number in E.164 format */
     public var callerPhoneNumber: String?
     /** Caller Extension ID */
@@ -16,7 +17,7 @@ open class CreateCallParams: JSONEncodable {
     /** Caller caller ID in E.164 format */
     public var callerCallerId: String?
     /** Flag to set caller ID to private */
-    public var callerPrivate: Bool?
+    public var callerPrivate: String?
     /** Callee phone number in E.164 format */
     public var calleePhoneNumber: String?
     /** Callee Extension ID */
@@ -24,7 +25,7 @@ open class CreateCallParams: JSONEncodable {
     /** Callee caller ID in E.164 format */
     public var calleeCallerId: String?
     /** Flag to set callee ID to private */
-    public var calleePrivate: Bool?
+    public var calleePrivate: String?
 
     public init() {}
 
@@ -39,6 +40,7 @@ open class CreateCallParams: JSONEncodable {
         nillableDictionary["callee_extension"] = self.calleeExtension?.encodeToJSON()
         nillableDictionary["callee_caller_id"] = self.calleeCallerId
         nillableDictionary["callee_private"] = self.calleePrivate
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

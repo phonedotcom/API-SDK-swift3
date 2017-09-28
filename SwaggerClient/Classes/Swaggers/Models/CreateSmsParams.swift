@@ -9,6 +9,7 @@ import Foundation
 
 
 open class CreateSmsParams: JSONEncodable {
+
     /** Phone number of sender */
     public var from: String?
     /** Outgoing destination numbers */
@@ -27,6 +28,7 @@ open class CreateSmsParams: JSONEncodable {
         nillableDictionary["to"] = self.to
         nillableDictionary["text"] = self.text
         nillableDictionary["extension_id"] = self.extensionId?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

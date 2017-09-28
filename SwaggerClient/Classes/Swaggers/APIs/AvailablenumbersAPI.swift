@@ -5,6 +5,7 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
@@ -46,9 +47,9 @@ open class AvailablenumbersAPI: APIBase {
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "country_code" : "aeiou",
     "country" : "aeiou",
@@ -72,7 +73,7 @@ open class AvailablenumbersAPI: APIBase {
     "province" : "aeiou",
     "city" : "aeiou",
     "formatted" : "aeiou",
-    "price" : 123,
+    "price" : 5,
     "xxxx" : "aeiou",
     "phone_number" : "aeiou",
     "is_toll_free" : true,

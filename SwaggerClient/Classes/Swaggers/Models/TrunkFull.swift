@@ -10,6 +10,7 @@ import Foundation
 
 /** The Full Trunk Object is identical to the Trunk Summary Object, along with the following: */
 open class TrunkFull: JSONEncodable {
+
     /** Integer Trunk ID. Read-only. */
     public var id: Int32?
     /** Name. Required. */
@@ -40,6 +41,7 @@ open class TrunkFull: JSONEncodable {
         nillableDictionary["greeting"] = self.greeting?.encodeToJSON()
         nillableDictionary["error_message"] = self.errorMessage?.encodeToJSON()
         nillableDictionary["codecs"] = self.codecs?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

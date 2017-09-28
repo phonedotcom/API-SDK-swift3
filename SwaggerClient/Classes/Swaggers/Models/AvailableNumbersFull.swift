@@ -10,6 +10,7 @@ import Foundation
 
 /** The Full Available Phone Number Object includes the properties in the Summary Object, along with the following: */
 open class AvailableNumbersFull: JSONEncodable {
+
     /** Phone number, in E.164 format */
     public var phoneNumber: String?
     /** Human-readable formatted version of the phone number */
@@ -49,6 +50,7 @@ open class AvailableNumbersFull: JSONEncodable {
         nillableDictionary["city"] = self.city
         nillableDictionary["province"] = self.province
         nillableDictionary["country"] = self.country
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

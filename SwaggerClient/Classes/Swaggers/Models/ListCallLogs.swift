@@ -9,6 +9,7 @@ import Foundation
 
 
 open class ListCallLogs: JSONEncodable {
+
     public var filters: FilterCallLogs?
     public var sort: SortCallLogs?
     public var total: Int32?
@@ -27,6 +28,7 @@ open class ListCallLogs: JSONEncodable {
         nillableDictionary["offset"] = self.offset?.encodeToJSON()
         nillableDictionary["limit"] = self.limit?.encodeToJSON()
         nillableDictionary["items"] = self.items?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

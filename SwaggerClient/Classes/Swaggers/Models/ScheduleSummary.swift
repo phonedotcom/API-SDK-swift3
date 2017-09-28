@@ -10,6 +10,7 @@ import Foundation
 
 /** The Schedule Summary Object is used to briefly represent a schedule. It can be seen in several places throughout this API. Here are the properties: */
 open class ScheduleSummary: JSONEncodable {
+
     /** Integer Schedule ID. Read-only. */
     public var id: Int32?
     /** Name */
@@ -22,6 +23,7 @@ open class ScheduleSummary: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["id"] = self.id?.encodeToJSON()
         nillableDictionary["name"] = self.name
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

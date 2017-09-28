@@ -10,6 +10,7 @@ import Foundation
 
 /** The Full Contact Object includes all of the properties in the Contact Summary Object, along with several more: */
 open class ContactFull: JSONEncodable {
+
     /** Integer ID. Read-only. */
     public var id: Int32?
     /** Salutation, such as Mr, Mrs, or Dr */
@@ -72,6 +73,7 @@ open class ContactFull: JSONEncodable {
         nillableDictionary["group"] = self.group?.encodeToJSON()
         nillableDictionary["created_at"] = self.createdAt?.encodeToJSON()
         nillableDictionary["updated_at"] = self.updatedAt?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

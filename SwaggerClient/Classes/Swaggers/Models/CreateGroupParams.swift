@@ -9,6 +9,7 @@ import Foundation
 
 
 open class CreateGroupParams: JSONEncodable {
+
     /** Group name */
     public var name: String?
 
@@ -18,6 +19,7 @@ open class CreateGroupParams: JSONEncodable {
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["name"] = self.name
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

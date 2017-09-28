@@ -10,13 +10,14 @@ import Foundation
 
 /** The Full Menu Object contains the same properties as the Menu Summary Object, along with the following: */
 open class MenuFull: JSONEncodable {
+
     /** Integer Menu ID. Read-only. */
     public var id: Int32?
     /** Name. Required. Unique. */
     public var name: String?
     /** Boolean. Determines whether a caller can enter an extension number to bypass the menu. */
     public var allowExtensionDial: Bool?
-    /** Boolean. Determines whether a caller can enter an extension number to bypass the menu. */
+    /** Number of seconds to wait for the caller to choose a menu option. Must be between 1 and 5 seconds. */
     public var keypressWaitTime: Int32?
     /** Greeting that is played when a caller enters a menu. Output is a Media Summary Object. Input must be a Media Lookup Object. Must refer to a media recording that has is_hold_music set to FALSE. */
     public var greeting: MediaSummary?
@@ -40,6 +41,7 @@ open class MenuFull: JSONEncodable {
         nillableDictionary["keypress_error"] = self.keypressError?.encodeToJSON()
         nillableDictionary["timeout_handler"] = self.timeoutHandler?.encodeToJSON()
         nillableDictionary["options"] = self.options?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

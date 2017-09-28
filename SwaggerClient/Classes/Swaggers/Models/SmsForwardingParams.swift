@@ -10,6 +10,7 @@ import Foundation
 
 /** SMS Forwarding Object, or NULL */
 open class SmsForwardingParams: JSONEncodable {
+
     /** Can be \&quot;extension\&quot; or \&quot;application\&quot; */
     public var type: String?
     /** Required if type &#x3D; \&quot;extension\&quot;. Extension that messages should be directed to. Output is an Extension Summary Object. Input must be an Extension Lookup Object. */
@@ -25,6 +26,7 @@ open class SmsForwardingParams: JSONEncodable {
         nillableDictionary["type"] = self.type
         nillableDictionary["extension"] = self._extension?.encodeToJSON()
         nillableDictionary["application"] = self.application?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

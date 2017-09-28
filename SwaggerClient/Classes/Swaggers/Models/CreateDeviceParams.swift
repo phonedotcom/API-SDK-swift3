@@ -9,6 +9,7 @@ import Foundation
 
 
 open class CreateDeviceParams: JSONEncodable {
+
     /** Device Name */
     public var name: String?
     /** List of line objects */
@@ -21,6 +22,7 @@ open class CreateDeviceParams: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["name"] = self.name
         nillableDictionary["lines"] = self.lines?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

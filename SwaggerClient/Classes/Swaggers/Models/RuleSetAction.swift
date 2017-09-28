@@ -10,6 +10,7 @@ import Foundation
 
 /** Filter Object. Optional. See below for details. */
 open class RuleSetAction: JSONEncodable {
+
     /** Required. */
     public var action: String?
     /** Extension that this action refers to. Output is an Extension Summary Object. Input must be an Extension Lookup Object. Required. */
@@ -46,6 +47,7 @@ open class RuleSetAction: JSONEncodable {
         nillableDictionary["menu"] = self.menu?.encodeToJSON()
         nillableDictionary["queue"] = self.queue?.encodeToJSON()
         nillableDictionary["trunk"] = self.trunk?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

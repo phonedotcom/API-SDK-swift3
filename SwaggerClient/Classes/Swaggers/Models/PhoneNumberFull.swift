@@ -10,6 +10,7 @@ import Foundation
 
 /** The Full Phone Number Object has all of the properties of the Phone Number Summary Object, along with several more, as shown below: */
 open class PhoneNumberFull: JSONEncodable {
+
     /** Integer Phone number ID. This is the internal Phone.com ID for this number, not the phone number itself. Read-only. */
     public var id: Int32?
     /** Name */
@@ -22,9 +23,7 @@ open class PhoneNumberFull: JSONEncodable {
     public var blockAnonymous: Bool?
     /** The Route assigned to handle incoming calls for this number, if any. Output is a Route Summary Object, or NULL if not set. Input can be a Route Lookup Object or NULL to unset. */
     public var route: RouteSummary?
-    /** Caller ID Object, or NULL */
     public var callerId: CallerIdPhoneNumber?
-    /** SMS Forwarding Object, or NULL */
     public var smsForwarding: SmsForwarding?
     public var callNotifications: CallNotifications?
 
@@ -42,6 +41,7 @@ open class PhoneNumberFull: JSONEncodable {
         nillableDictionary["caller_id"] = self.callerId?.encodeToJSON()
         nillableDictionary["sms_forwarding"] = self.smsForwarding?.encodeToJSON()
         nillableDictionary["call_notifications"] = self.callNotifications?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

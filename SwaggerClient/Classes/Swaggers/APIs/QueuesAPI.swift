@@ -5,13 +5,14 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
 
 open class QueuesAPI: APIBase {
     /**
-     Create a queue
+     Create a queue.
      
      - parameter accountId: (path) Account ID 
      - parameter data: (body) Queue data (optional)
@@ -25,9 +26,9 @@ open class QueuesAPI: APIBase {
 
 
     /**
-     Create a queue
-     - POST /accounts/{accountId}/queues
-     - For more on the input fields, see Account Queues.
+     Create a queue.
+     - POST /accounts/{account_id}/queues
+     - Create a queue. See Account Queues for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -35,24 +36,24 @@ open class QueuesAPI: APIBase {
   "caller_id_type" : "aeiou",
   "hold_music" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 1
   },
-  "max_hold_time" : 123,
+  "max_hold_time" : 5,
   "greeting" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 6
   },
   "members" : [ {
     "extension" : {
-      "extension" : 123,
+      "extension" : 7,
       "name" : "aeiou",
-      "id" : 123
+      "id" : 2
     },
     "phone_number" : "aeiou"
   } ],
   "name" : "aeiou",
-  "ring_time" : 123,
-  "id" : 123
+  "ring_time" : 5,
+  "id" : 0
 }}]
      
      - parameter accountId: (path) Account ID 
@@ -61,8 +62,8 @@ open class QueuesAPI: APIBase {
      - returns: RequestBuilder<QueueFull> 
      */
     open class func createAccountQueueWithRequestBuilder(accountId: Int32, data: CreateQueueParams? = nil) -> RequestBuilder<QueueFull> {
-        var path = "/accounts/{accountId}/queues"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/queues"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 
@@ -75,13 +76,13 @@ open class QueuesAPI: APIBase {
     }
 
     /**
-     Delete a queue
+     Delete a queue.
      
      - parameter accountId: (path) Account ID 
      - parameter queueId: (path) Queue ID 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func deleteAccountQueue(accountId: Int32, queueId: Int32, completion: @escaping ((_ data: DeleteQueue?,_ error: Error?) -> Void)) {
+    open class func deleteAccountQueue(accountId: Int32, queueId: Int32, completion: @escaping ((_ data: DeleteEntry?,_ error: Error?) -> Void)) {
         deleteAccountQueueWithRequestBuilder(accountId: accountId, queueId: queueId).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -89,9 +90,9 @@ open class QueuesAPI: APIBase {
 
 
     /**
-     Delete a queue
-     - DELETE /accounts/{accountId}/queues/{queueId}
-     - This service a queue from the account. For more information on queue properties, see Account Queues.
+     Delete a queue.
+     - DELETE /accounts/{account_id}/queues/{queue_id}
+     - Delete a queue. See Account Queues for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -102,25 +103,25 @@ open class QueuesAPI: APIBase {
      - parameter accountId: (path) Account ID 
      - parameter queueId: (path) Queue ID 
 
-     - returns: RequestBuilder<DeleteQueue> 
+     - returns: RequestBuilder<DeleteEntry> 
      */
-    open class func deleteAccountQueueWithRequestBuilder(accountId: Int32, queueId: Int32) -> RequestBuilder<DeleteQueue> {
-        var path = "/accounts/{accountId}/queues/{queueId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{queueId}", with: "\(queueId)", options: .literal, range: nil)
+    open class func deleteAccountQueueWithRequestBuilder(accountId: Int32, queueId: Int32) -> RequestBuilder<DeleteEntry> {
+        var path = "/accounts/{account_id}/queues/{queue_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{queue_id}", with: "\(queueId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
 
 
-        let requestBuilder: RequestBuilder<DeleteQueue>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<DeleteEntry>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-     Show details of an individual queue
+     Show details of an individual queue.
      
      - parameter accountId: (path) Account ID 
      - parameter queueId: (path) Queue ID 
@@ -134,9 +135,9 @@ open class QueuesAPI: APIBase {
 
 
     /**
-     Show details of an individual queue
-     - GET /accounts/{accountId}/queues/{queueId}
-     - This service shows the details of an individual queue. For more on the input fields, see Account Queues.
+     Show details of an individual queue.
+     - GET /accounts/{account_id}/queues/{queue_id}
+     - Show details of an individual queue. See Account Queues for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -144,24 +145,24 @@ open class QueuesAPI: APIBase {
   "caller_id_type" : "aeiou",
   "hold_music" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 1
   },
-  "max_hold_time" : 123,
+  "max_hold_time" : 5,
   "greeting" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 6
   },
   "members" : [ {
     "extension" : {
-      "extension" : 123,
+      "extension" : 7,
       "name" : "aeiou",
-      "id" : 123
+      "id" : 2
     },
     "phone_number" : "aeiou"
   } ],
   "name" : "aeiou",
-  "ring_time" : 123,
-  "id" : 123
+  "ring_time" : 5,
+  "id" : 0
 }}]
      
      - parameter accountId: (path) Account ID 
@@ -170,9 +171,9 @@ open class QueuesAPI: APIBase {
      - returns: RequestBuilder<QueueFull> 
      */
     open class func getAccountQueueWithRequestBuilder(accountId: Int32, queueId: Int32) -> RequestBuilder<QueueFull> {
-        var path = "/accounts/{accountId}/queues/{queueId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{queueId}", with: "\(queueId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/queues/{queue_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{queue_id}", with: "\(queueId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -185,7 +186,7 @@ open class QueuesAPI: APIBase {
     }
 
     /**
-     Get a list of queues for an account
+     Get a list of queues for an account.
      
      - parameter accountId: (path) Account ID 
      - parameter filtersId: (query) ID filter (optional)
@@ -205,16 +206,16 @@ open class QueuesAPI: APIBase {
 
 
     /**
-     Get a list of queues for an account
-     - GET /accounts/{accountId}/queues
-     - The List Queues service lists all the queues belong to the account. See Account Queues for more info on the properties.
+     Get a list of queues for an account.
+     - GET /accounts/{account_id}/queues
+     - Get a list of queues for an account. See Account Queues for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "name" : "aeiou",
     "id" : "aeiou"
@@ -227,24 +228,24 @@ open class QueuesAPI: APIBase {
     "caller_id_type" : "aeiou",
     "hold_music" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 2
     },
-    "max_hold_time" : 123,
+    "max_hold_time" : 7,
     "greeting" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     },
     "members" : [ {
       "extension" : {
-        "extension" : 123,
+        "extension" : 2,
         "name" : "aeiou",
-        "id" : 123
+        "id" : 3
       },
       "phone_number" : "aeiou"
     } ],
     "name" : "aeiou",
-    "ring_time" : 123,
-    "id" : 123
+    "ring_time" : 9,
+    "id" : 5
   } ]
 }}]
      
@@ -260,8 +261,8 @@ open class QueuesAPI: APIBase {
      - returns: RequestBuilder<ListQueues> 
      */
     open class func listAccountQueuesWithRequestBuilder(accountId: Int32, filtersId: [String]? = nil, filtersName: [String]? = nil, sortId: String? = nil, sortName: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListQueues> {
-        var path = "/accounts/{accountId}/queues"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/queues"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -283,7 +284,7 @@ open class QueuesAPI: APIBase {
     }
 
     /**
-     Replace a queue
+     Replace a queue.
      
      - parameter accountId: (path) Account ID 
      - parameter queueId: (path) Queue ID 
@@ -298,9 +299,9 @@ open class QueuesAPI: APIBase {
 
 
     /**
-     Replace a queue
-     - PUT /accounts/{accountId}/queues/{queueId}
-     - The Replace Queue service replaces the parameters of a queue. For more on the input fields, see Account Queues.
+     Replace a queue.
+     - PUT /accounts/{account_id}/queues/{queue_id}
+     - Replace a queue. See Account Queues for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -308,24 +309,24 @@ open class QueuesAPI: APIBase {
   "caller_id_type" : "aeiou",
   "hold_music" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 1
   },
-  "max_hold_time" : 123,
+  "max_hold_time" : 5,
   "greeting" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 6
   },
   "members" : [ {
     "extension" : {
-      "extension" : 123,
+      "extension" : 7,
       "name" : "aeiou",
-      "id" : 123
+      "id" : 2
     },
     "phone_number" : "aeiou"
   } ],
   "name" : "aeiou",
-  "ring_time" : 123,
-  "id" : 123
+  "ring_time" : 5,
+  "id" : 0
 }}]
      
      - parameter accountId: (path) Account ID 
@@ -335,9 +336,9 @@ open class QueuesAPI: APIBase {
      - returns: RequestBuilder<QueueFull> 
      */
     open class func replaceAccountQueueWithRequestBuilder(accountId: Int32, queueId: Int32, data: CreateQueueParams? = nil) -> RequestBuilder<QueueFull> {
-        var path = "/accounts/{accountId}/queues/{queueId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{queueId}", with: "\(queueId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/queues/{queue_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{queue_id}", with: "\(queueId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 

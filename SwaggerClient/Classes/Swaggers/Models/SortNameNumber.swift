@@ -9,6 +9,7 @@ import Foundation
 
 
 open class SortNameNumber: JSONEncodable {
+
     public var name: String?
     public var number: String?
 
@@ -19,6 +20,7 @@ open class SortNameNumber: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["name"] = self.name
         nillableDictionary["number"] = self.number
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

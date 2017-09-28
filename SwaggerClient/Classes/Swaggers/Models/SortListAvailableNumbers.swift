@@ -9,6 +9,7 @@ import Foundation
 
 
 open class SortListAvailableNumbers: JSONEncodable {
+
     public var _internal: String?
     public var price: String?
     public var phoneNumber: String?
@@ -21,6 +22,7 @@ open class SortListAvailableNumbers: JSONEncodable {
         nillableDictionary["internal"] = self._internal
         nillableDictionary["price"] = self.price
         nillableDictionary["phone_number"] = self.phoneNumber
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

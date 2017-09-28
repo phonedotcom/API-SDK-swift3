@@ -9,6 +9,7 @@ import Foundation
 
 
 open class SortIdCreatedAt: JSONEncodable {
+
     public var id: String?
     public var createdAt: String?
 
@@ -19,6 +20,7 @@ open class SortIdCreatedAt: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["id"] = self.id
         nillableDictionary["created_at"] = self.createdAt
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

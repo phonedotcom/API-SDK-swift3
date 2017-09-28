@@ -10,6 +10,7 @@ import Foundation
 
 /** The root level of the Full Route Object includes all of the properties in the Route Summary Object, along with two more: */
 open class RouteFull: JSONEncodable {
+
     /** Integer ID. Read-only. */
     public var id: Int32?
     /** Name */
@@ -28,6 +29,7 @@ open class RouteFull: JSONEncodable {
         nillableDictionary["name"] = self.name
         nillableDictionary["extension"] = self._extension?.encodeToJSON()
         nillableDictionary["rules"] = self.rules?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

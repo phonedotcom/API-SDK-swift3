@@ -10,6 +10,7 @@ import Foundation
 
 /** The Device Summary Object is used to briefly represent a VoIP device. It consists of the ID and name only: */
 open class DeviceSummary: JSONEncodable {
+
     /** ID */
     public var id: Int32?
     /** User-supplied name, otherwise NULL */
@@ -22,6 +23,7 @@ open class DeviceSummary: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["id"] = self.id?.encodeToJSON()
         nillableDictionary["name"] = self.name
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

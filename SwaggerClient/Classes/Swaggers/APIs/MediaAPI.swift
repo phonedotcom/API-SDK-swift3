@@ -5,6 +5,7 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
@@ -27,14 +28,14 @@ open class MediaAPI: APIBase {
 
     /**
      Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)
-     - POST /accounts/{accountId}/media/files
+     - POST /accounts/{account_id}/media/files
      - See Account Media for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "name" : "aeiou",
-  "id" : 123,
+  "id" : 0,
   "type" : "aeiou"
 }}]
      
@@ -45,8 +46,8 @@ open class MediaAPI: APIBase {
      - returns: RequestBuilder<MediaFull> 
      */
     open class func createAccountMediaFilesWithRequestBuilder(accountId: Int32, json: String? = nil, file: URL? = nil) -> RequestBuilder<MediaFull> {
-        var path = "/accounts/{accountId}/media/files"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/media/files"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let formParams: [String:Any?] = [
             "json": json,
@@ -80,14 +81,14 @@ open class MediaAPI: APIBase {
 
     /**
      Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)
-     - POST /accounts/{accountId}/media/tts
+     - POST /accounts/{account_id}/media/tts
      - See Account Media for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "name" : "aeiou",
-  "id" : 123,
+  "id" : 0,
   "type" : "aeiou"
 }}]
      
@@ -97,8 +98,8 @@ open class MediaAPI: APIBase {
      - returns: RequestBuilder<MediaFull> 
      */
     open class func createAccountMediaTtsWithRequestBuilder(accountId: Int32, data: CreateMediaParams? = nil) -> RequestBuilder<MediaFull> {
-        var path = "/accounts/{accountId}/media/tts"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/media/tts"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 
@@ -117,7 +118,7 @@ open class MediaAPI: APIBase {
      - parameter mediaId: (path) Media ID 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func deleteAccountMedia(accountId: Int32, mediaId: Int32, completion: @escaping ((_ data: DeleteMedia?,_ error: Error?) -> Void)) {
+    open class func deleteAccountMedia(accountId: Int32, mediaId: Int32, completion: @escaping ((_ data: DeleteEntry?,_ error: Error?) -> Void)) {
         deleteAccountMediaWithRequestBuilder(accountId: accountId, mediaId: mediaId).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -126,7 +127,7 @@ open class MediaAPI: APIBase {
 
     /**
      Delete an individual media record
-     - DELETE /accounts/{accountId}/media/{mediaId}
+     - DELETE /accounts/{account_id}/media/{media_id}
      - See Account Media for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
@@ -138,19 +139,19 @@ open class MediaAPI: APIBase {
      - parameter accountId: (path) Account ID 
      - parameter mediaId: (path) Media ID 
 
-     - returns: RequestBuilder<DeleteMedia> 
+     - returns: RequestBuilder<DeleteEntry> 
      */
-    open class func deleteAccountMediaWithRequestBuilder(accountId: Int32, mediaId: Int32) -> RequestBuilder<DeleteMedia> {
-        var path = "/accounts/{accountId}/media/{mediaId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{mediaId}", with: "\(mediaId)", options: .literal, range: nil)
+    open class func deleteAccountMediaWithRequestBuilder(accountId: Int32, mediaId: Int32) -> RequestBuilder<DeleteEntry> {
+        var path = "/accounts/{account_id}/media/{media_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{media_id}", with: "\(mediaId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
 
 
-        let requestBuilder: RequestBuilder<DeleteMedia>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<DeleteEntry>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -171,14 +172,14 @@ open class MediaAPI: APIBase {
 
     /**
      Show details of an individual media recording (Greeting or Hold Music)
-     - GET /accounts/{accountId}/media/{mediaId}
+     - GET /accounts/{account_id}/media/{media_id}
      - Get individual media recording
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "name" : "aeiou",
-  "id" : 123,
+  "id" : 0,
   "type" : "aeiou"
 }}]
      
@@ -188,9 +189,9 @@ open class MediaAPI: APIBase {
      - returns: RequestBuilder<MediaFull> 
      */
     open class func getAccountMediaWithRequestBuilder(accountId: Int32, mediaId: Int32) -> RequestBuilder<MediaFull> {
-        var path = "/accounts/{accountId}/media/{mediaId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{mediaId}", with: "\(mediaId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/media/{media_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{media_id}", with: "\(mediaId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -203,7 +204,7 @@ open class MediaAPI: APIBase {
     }
 
     /**
-     Get a list of media recordings for an account
+     Get a list of media recordings for an account.
      
      - parameter accountId: (path) Account ID 
      - parameter filtersId: (query) ID filter (optional)
@@ -223,16 +224,16 @@ open class MediaAPI: APIBase {
 
 
     /**
-     Get a list of media recordings for an account
-     - GET /accounts/{accountId}/media
-     - See Account Menus for more info on the properties.
+     Get a list of media recordings for an account.
+     - GET /accounts/{account_id}/media
+     - Get a list of media recordings for an account. See Account Media for more info on the properties. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level List Media API with the following definition: GET https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/media
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "name" : "aeiou",
     "id" : "aeiou"
@@ -243,7 +244,7 @@ open class MediaAPI: APIBase {
   },
   "items" : [ {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 5
   } ]
 }}]
      
@@ -259,8 +260,8 @@ open class MediaAPI: APIBase {
      - returns: RequestBuilder<ListMedia> 
      */
     open class func listAccountMediaWithRequestBuilder(accountId: Int32, filtersId: [String]? = nil, filtersName: [String]? = nil, sortId: String? = nil, sortName: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListMedia> {
-        var path = "/accounts/{accountId}/media"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/media"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -299,14 +300,14 @@ open class MediaAPI: APIBase {
 
     /**
      Update a media object to your account. Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB.
-     - PUT /accounts/{accountId}/media/files/{mediaId}
+     - PUT /accounts/{account_id}/media/files/{media_id}
      - See Account Media for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "name" : "aeiou",
-  "id" : 123,
+  "id" : 0,
   "type" : "aeiou"
 }}]
      
@@ -318,9 +319,9 @@ open class MediaAPI: APIBase {
      - returns: RequestBuilder<MediaFull> 
      */
     open class func replaceAccountMediaFilesWithRequestBuilder(accountId: Int32, mediaId: Int32, json: String? = nil, file: URL? = nil) -> RequestBuilder<MediaFull> {
-        var path = "/accounts/{accountId}/media/files/{mediaId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{mediaId}", with: "\(mediaId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/media/files/{media_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{media_id}", with: "\(mediaId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let formParams: [String:Any?] = [
             "json": json,
@@ -339,7 +340,7 @@ open class MediaAPI: APIBase {
     }
 
     /**
-     Update a media object to your account. Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB.
+     Update a media object to your account.
      
      - parameter accountId: (path) Account ID 
      - parameter mediaId: (path) Media ID 
@@ -354,15 +355,15 @@ open class MediaAPI: APIBase {
 
 
     /**
-     Update a media object to your account. Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB.
-     - PUT /accounts/{accountId}/media/tts/{mediaId}
-     - See Account Media for more info on the properties.
+     Update a media object to your account.
+     - PUT /accounts/{account_id}/media/tts/{media_id}
+     - Update a media object to your account. Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB. See Account Media for more info on the properties. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level Replace Media API with the following definition: PUT https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/media/:media_id
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "name" : "aeiou",
-  "id" : 123,
+  "id" : 0,
   "type" : "aeiou"
 }}]
      
@@ -373,9 +374,9 @@ open class MediaAPI: APIBase {
      - returns: RequestBuilder<MediaFull> 
      */
     open class func replaceAccountMediaTtsWithRequestBuilder(accountId: Int32, mediaId: Int32, data: CreateMediaParams? = nil) -> RequestBuilder<MediaFull> {
-        var path = "/accounts/{accountId}/media/tts/{mediaId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{mediaId}", with: "\(mediaId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/media/tts/{media_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{media_id}", with: "\(mediaId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 

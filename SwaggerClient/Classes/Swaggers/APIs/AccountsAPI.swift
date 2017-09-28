@@ -5,6 +5,7 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
@@ -25,8 +26,8 @@ open class AccountsAPI: APIBase {
 
     /**
      Retrieve details of an individual account
-     - GET /accounts/{accountId}
-     - This service shows the details of an individual account. See Accounts for more info on the properties.
+     - GET /accounts/{account_id}
+     - Retrieve details of an individual account. See Accounts for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -52,9 +53,9 @@ open class AccountsAPI: APIBase {
   "name" : "aeiou",
   "master_account" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 6
   },
-  "id" : 123,
+  "id" : 0,
   "username" : "aeiou"
 }}]
      
@@ -63,8 +64,8 @@ open class AccountsAPI: APIBase {
      - returns: RequestBuilder<AccountFull> 
      */
     open class func getAccountWithRequestBuilder(accountId: Int32) -> RequestBuilder<AccountFull> {
-        var path = "/accounts/{accountId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -77,7 +78,7 @@ open class AccountsAPI: APIBase {
     }
 
     /**
-     Get a list of accounts visible to the authenticated user or client
+     Get a list of accounts visible to the authenticated user or client.
      
      - parameter filtersId: (query) ID filter (optional)
      - parameter sortId: (query) ID sorting (optional)
@@ -94,16 +95,16 @@ open class AccountsAPI: APIBase {
 
 
     /**
-     Get a list of accounts visible to the authenticated user or client
+     Get a list of accounts visible to the authenticated user or client.
      - GET /accounts
-     - This service lists the accounts accessible to the authenticated client. In most cases, there will only be one such account. See Accounts for more info on the properties.
+     - Get a list of accounts visible to the authenticated user or client. In most cases, there will only be one such account. See Accounts for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "id" : "aeiou"
   },
@@ -132,9 +133,9 @@ open class AccountsAPI: APIBase {
     "name" : "aeiou",
     "master_account" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     },
-    "id" : 123,
+    "id" : 5,
     "username" : "aeiou"
   } ]
 }}]

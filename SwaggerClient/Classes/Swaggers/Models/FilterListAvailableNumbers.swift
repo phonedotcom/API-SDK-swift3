@@ -9,6 +9,7 @@ import Foundation
 
 
 open class FilterListAvailableNumbers: JSONEncodable {
+
     public var phoneNumber: String?
     public var countryCode: String?
     public var npa: String?
@@ -35,6 +36,7 @@ open class FilterListAvailableNumbers: JSONEncodable {
         nillableDictionary["country"] = self.country
         nillableDictionary["price"] = self.price
         nillableDictionary["category"] = self.category
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

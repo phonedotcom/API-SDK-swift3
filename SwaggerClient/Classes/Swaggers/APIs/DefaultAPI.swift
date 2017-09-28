@@ -5,6 +5,7 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
@@ -33,7 +34,7 @@ open class DefaultAPI: APIBase {
   "datetime" : "aeiou",
   "remote_ip" : "aeiou",
   "user_agent" : "aeiou",
-  "timestamp" : 123
+  "timestamp" : 0
 }}]
 
      - returns: RequestBuilder<PingResponse> 

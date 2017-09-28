@@ -9,6 +9,7 @@ import Foundation
 
 
 open class Recipient: JSONEncodable {
+
     /** Phone number that will receive the SMS message */
     public var number: String?
     /** Indicate the status of your SMS object. May be &#39;sent&#39;, &#39;received&#39;, &#39;queued&#39;, &#39;new&#39; ... */
@@ -21,6 +22,7 @@ open class Recipient: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["number"] = self.number
         nillableDictionary["status"] = self.status
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

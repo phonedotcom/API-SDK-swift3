@@ -5,13 +5,14 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
 
 open class TrunksAPI: APIBase {
     /**
-     Add a trunk record with SIP information
+     Add a trunk record with SIP information.
      
      - parameter accountId: (path) Account ID 
      - parameter data: (body) Trunk data 
@@ -25,23 +26,23 @@ open class TrunksAPI: APIBase {
 
 
     /**
-     Add a trunk record with SIP information
-     - POST /accounts/{accountId}/trunks
-     - For more on the input fields, see Account Trunks.
+     Add a trunk record with SIP information.
+     - POST /accounts/{account_id}/trunks
+     - Add a trunk record with SIP information. See Account Trunks for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "error_message" : "",
-  "max_minutes_per_month" : 123,
+  "max_minutes_per_month" : 1,
   "greeting" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 5
   },
   "codecs" : [ "aeiou" ],
   "name" : "aeiou",
-  "id" : 123,
-  "max_concurrent_calls" : 123,
+  "id" : 0,
+  "max_concurrent_calls" : 6,
   "uri" : "aeiou"
 }}]
      
@@ -51,8 +52,8 @@ open class TrunksAPI: APIBase {
      - returns: RequestBuilder<TrunkFull> 
      */
     open class func createAccountTrunkWithRequestBuilder(accountId: Int32, data: CreateTrunkParams) -> RequestBuilder<TrunkFull> {
-        var path = "/accounts/{accountId}/trunks"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/trunks"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data.encodeToJSON() as? [String:AnyObject]
 
@@ -65,13 +66,13 @@ open class TrunksAPI: APIBase {
     }
 
     /**
-     Delete a trunk from account
+     Delete a trunk from account.
      
      - parameter accountId: (path) Account ID 
      - parameter trunkId: (path) Trunk ID 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func deleteAccountTrunk(accountId: Int32, trunkId: Int32, completion: @escaping ((_ data: DeleteTrunk?,_ error: Error?) -> Void)) {
+    open class func deleteAccountTrunk(accountId: Int32, trunkId: Int32, completion: @escaping ((_ data: DeleteEntry?,_ error: Error?) -> Void)) {
         deleteAccountTrunkWithRequestBuilder(accountId: accountId, trunkId: trunkId).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -79,9 +80,9 @@ open class TrunksAPI: APIBase {
 
 
     /**
-     Delete a trunk from account
-     - DELETE /accounts/{accountId}/trunks/{trunkId}
-     - This service deletes a trunk from the account. For more on the properties of trunks, see Account Trunks.
+     Delete a trunk from account.
+     - DELETE /accounts/{account_id}/trunks/{trunk_id}
+     - Delete a trunk from account. See Account Trunks for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -92,25 +93,25 @@ open class TrunksAPI: APIBase {
      - parameter accountId: (path) Account ID 
      - parameter trunkId: (path) Trunk ID 
 
-     - returns: RequestBuilder<DeleteTrunk> 
+     - returns: RequestBuilder<DeleteEntry> 
      */
-    open class func deleteAccountTrunkWithRequestBuilder(accountId: Int32, trunkId: Int32) -> RequestBuilder<DeleteTrunk> {
-        var path = "/accounts/{accountId}/trunks/{trunkId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{trunkId}", with: "\(trunkId)", options: .literal, range: nil)
+    open class func deleteAccountTrunkWithRequestBuilder(accountId: Int32, trunkId: Int32) -> RequestBuilder<DeleteEntry> {
+        var path = "/accounts/{account_id}/trunks/{trunk_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{trunk_id}", with: "\(trunkId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
 
 
-        let requestBuilder: RequestBuilder<DeleteTrunk>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<DeleteEntry>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-     Show details of an individual trunk
+     Show details of an individual trunk.
      
      - parameter accountId: (path) Account ID 
      - parameter trunkId: (path) Trunk ID 
@@ -124,23 +125,23 @@ open class TrunksAPI: APIBase {
 
 
     /**
-     Show details of an individual trunk
-     - GET /accounts/{accountId}/trunks/{trunkId}
-     - This service shows the details of an individual Trunk.
+     Show details of an individual trunk.
+     - GET /accounts/{account_id}/trunks/{trunk_id}
+     - Show details of an individual trunk. See Account Trunks for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "error_message" : "",
-  "max_minutes_per_month" : 123,
+  "max_minutes_per_month" : 1,
   "greeting" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 5
   },
   "codecs" : [ "aeiou" ],
   "name" : "aeiou",
-  "id" : 123,
-  "max_concurrent_calls" : 123,
+  "id" : 0,
+  "max_concurrent_calls" : 6,
   "uri" : "aeiou"
 }}]
      
@@ -150,9 +151,9 @@ open class TrunksAPI: APIBase {
      - returns: RequestBuilder<TrunkFull> 
      */
     open class func getAccountTrunkWithRequestBuilder(accountId: Int32, trunkId: Int32) -> RequestBuilder<TrunkFull> {
-        var path = "/accounts/{accountId}/trunks/{trunkId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{trunkId}", with: "\(trunkId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/trunks/{trunk_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{trunk_id}", with: "\(trunkId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -165,7 +166,7 @@ open class TrunksAPI: APIBase {
     }
 
     /**
-     Get a list of trunks for an account
+     Get a list of trunks for an account.
      
      - parameter accountId: (path) Account ID 
      - parameter filtersId: (query) ID filter (optional)
@@ -185,16 +186,16 @@ open class TrunksAPI: APIBase {
 
 
     /**
-     Get a list of trunks for an account
-     - GET /accounts/{accountId}/trunks
-     - See Account Trunks for more info on the properties.
+     Get a list of trunks for an account.
+     - GET /accounts/{account_id}/trunks
+     - Get a list of trunks for an account. See Account Trunks for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "name" : "aeiou",
     "id" : "aeiou"
@@ -205,15 +206,15 @@ open class TrunksAPI: APIBase {
   },
   "items" : [ {
     "error_message" : "",
-    "max_minutes_per_month" : 123,
+    "max_minutes_per_month" : 2,
     "greeting" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 7
     },
     "codecs" : [ "aeiou" ],
     "name" : "aeiou",
-    "id" : 123,
-    "max_concurrent_calls" : 123,
+    "id" : 5,
+    "max_concurrent_calls" : 5,
     "uri" : "aeiou"
   } ]
 }}]
@@ -230,8 +231,8 @@ open class TrunksAPI: APIBase {
      - returns: RequestBuilder<ListTrunks> 
      */
     open class func listAccountTrunksWithRequestBuilder(accountId: Int32, filtersId: [String]? = nil, filtersName: [String]? = nil, sortId: String? = nil, sortName: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListTrunks> {
-        var path = "/accounts/{accountId}/trunks"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/trunks"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -253,7 +254,7 @@ open class TrunksAPI: APIBase {
     }
 
     /**
-     Replace parameters in a trunk
+     Replace parameters in a trunk.
      
      - parameter accountId: (path) Account ID 
      - parameter trunkId: (path) Trunk ID 
@@ -268,23 +269,23 @@ open class TrunksAPI: APIBase {
 
 
     /**
-     Replace parameters in a trunk
-     - PUT /accounts/{accountId}/trunks/{trunkId}
-     - For more on the input fields, see Account Trunks.
+     Replace parameters in a trunk.
+     - PUT /accounts/{account_id}/trunks/{trunk_id}
+     - Replace parameters in a trunk. See Account Trunks for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "error_message" : "",
-  "max_minutes_per_month" : 123,
+  "max_minutes_per_month" : 1,
   "greeting" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 5
   },
   "codecs" : [ "aeiou" ],
   "name" : "aeiou",
-  "id" : 123,
-  "max_concurrent_calls" : 123,
+  "id" : 0,
+  "max_concurrent_calls" : 6,
   "uri" : "aeiou"
 }}]
      
@@ -295,9 +296,9 @@ open class TrunksAPI: APIBase {
      - returns: RequestBuilder<TrunkFull> 
      */
     open class func replaceAccountTrunkWithRequestBuilder(accountId: Int32, trunkId: Int32, data: CreateTrunkParams) -> RequestBuilder<TrunkFull> {
-        var path = "/accounts/{accountId}/trunks/{trunkId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{trunkId}", with: "\(trunkId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/trunks/{trunk_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{trunk_id}", with: "\(trunkId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data.encodeToJSON() as? [String:AnyObject]
 

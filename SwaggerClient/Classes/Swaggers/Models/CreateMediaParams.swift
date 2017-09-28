@@ -9,6 +9,7 @@ import Foundation
 
 
 open class CreateMediaParams: JSONEncodable {
+
     /** Name of media */
     public var name: String?
     /** &#39;tts&#39;, &#39;file&#39; */
@@ -45,6 +46,7 @@ open class CreateMediaParams: JSONEncodable {
         nillableDictionary["duration"] = self.duration?.encodeToJSON()
         nillableDictionary["notes"] = self.notes
         nillableDictionary["randomized"] = self.randomized
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

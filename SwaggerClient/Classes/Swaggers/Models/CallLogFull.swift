@@ -10,6 +10,7 @@ import Foundation
 
 /** The Full Call Log Object includes the properties in the Call Log Summary Object, along with the following: */
 open class CallLogFull: JSONEncodable {
+
     /** ID */
     public var id: String?
     /** Internal system id, may be null */
@@ -36,8 +37,16 @@ open class CallLogFull: JSONEncodable {
     public var callNumber: String?
     /** Last action of call flow */
     public var finalAction: String?
-    /** URL of call recording if available. Empty string if call recording does not exist */
-    public var callRecording: String?
+    /** URL of voicemail if available. User may download the audio via this URL. Empty string if voicemail does not exist */
+    public var voicemailUrl: String?
+    /** URL of voicemail if available. User may listen to the audio online via this URL. Empty string if voicemail does not exist */
+    public var voicemailCpUrl: String?
+    /** Transcript of voicemail if enabled and available */
+    public var voicemailTranscript: String?
+    /** URL of call recording if available. User may download the audio via this URL. Empty string if call recording does not exist */
+    public var callRecordingUrl: String?
+    /** URL of call recording if available. User may listen to the audio online via this URL. Empty string if call recording does not exist */
+    public var callRecordingCpUrl: String?
     /** A list of call flows from beginning of call to end of call. */
     public var details: [CallDetails]?
     /** Internal system caller id / name */
@@ -61,9 +70,14 @@ open class CallLogFull: JSONEncodable {
         nillableDictionary["is_monitored"] = self.isMonitored
         nillableDictionary["call_number"] = self.callNumber
         nillableDictionary["final_action"] = self.finalAction
-        nillableDictionary["call_recording"] = self.callRecording
+        nillableDictionary["voicemail_url"] = self.voicemailUrl
+        nillableDictionary["voicemail_cp_url"] = self.voicemailCpUrl
+        nillableDictionary["voicemail_transcript"] = self.voicemailTranscript
+        nillableDictionary["call_recording_url"] = self.callRecordingUrl
+        nillableDictionary["call_recording_cp_url"] = self.callRecordingCpUrl
         nillableDictionary["details"] = self.details?.encodeToJSON()
         nillableDictionary["caller_cnam"] = self.callerCnam
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

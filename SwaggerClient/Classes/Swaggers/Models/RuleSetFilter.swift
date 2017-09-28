@@ -10,6 +10,7 @@ import Foundation
 
 /** Filter Object. Optional. See below for details. */
 open class RuleSetFilter: JSONEncodable {
+
     /** Required. */
     public var type: String?
     /** Schedule that this filter refers to. Output is a Schedule Summary Object. Input must be a Schedule Lookup Object. Required. */
@@ -28,6 +29,7 @@ open class RuleSetFilter: JSONEncodable {
         nillableDictionary["schedule"] = self.schedule?.encodeToJSON()
         nillableDictionary["contact"] = self.contact?.encodeToJSON()
         nillableDictionary["group"] = self.group?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

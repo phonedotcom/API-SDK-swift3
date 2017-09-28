@@ -5,6 +5,7 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
@@ -26,8 +27,8 @@ open class CallsAPI: APIBase {
 
     /**
      Make a phone call
-     - POST /accounts/{accountId}/calls
-     - 
+     - POST /accounts/{account_id}/calls
+     - Make a phone call. See Calls for more details and how to setup caller id's. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Calls API with the following definition: POST https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/calls
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -41,8 +42,8 @@ open class CallsAPI: APIBase {
      - returns: RequestBuilder<CallFull> 
      */
     open class func createAccountCallWithRequestBuilder(accountId: Int32, data: CreateCallParams? = nil) -> RequestBuilder<CallFull> {
-        var path = "/accounts/{accountId}/calls"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/calls"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 

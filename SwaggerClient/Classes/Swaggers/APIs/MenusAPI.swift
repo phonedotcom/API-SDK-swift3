@@ -5,13 +5,14 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
 
 open class MenusAPI: APIBase {
     /**
-     Create an individual menu
+     Create an individual menu.
      
      - parameter accountId: (path) Account ID 
      - parameter data: (body) Menu data (optional)
@@ -25,9 +26,9 @@ open class MenusAPI: APIBase {
 
 
     /**
-     Create an individual menu
-     - POST /accounts/{accountId}/menus
-     - This service creates an individual menu. See Account Menus for more info on the properties.
+     Create an individual menu.
+     - POST /accounts/{account_id}/menus
+     - Create an individual menu. See Account Menus for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -35,19 +36,19 @@ open class MenusAPI: APIBase {
   "allow_extension_dial" : true,
   "greeting" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 1
   },
   "timeout_handler" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 5
   },
   "name" : "aeiou",
   "options" : [ {
     "route" : "",
     "key" : "aeiou"
   } ],
-  "id" : 123,
-  "keypress_wait_time" : 123,
+  "id" : 0,
+  "keypress_wait_time" : 6,
   "keypress_error" : ""
 }}]
      
@@ -57,8 +58,8 @@ open class MenusAPI: APIBase {
      - returns: RequestBuilder<MenuFull> 
      */
     open class func createAccountMenuWithRequestBuilder(accountId: Int32, data: CreateMenuParams? = nil) -> RequestBuilder<MenuFull> {
-        var path = "/accounts/{accountId}/menus"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/menus"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 
@@ -71,13 +72,13 @@ open class MenusAPI: APIBase {
     }
 
     /**
-     Delete an individual menu
+     Delete an individual menu.
      
      - parameter accountId: (path) Account ID 
      - parameter menuId: (path) Menu ID 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func deleteAccountMenu(accountId: Int32, menuId: Int32, completion: @escaping ((_ data: DeleteMenu?,_ error: Error?) -> Void)) {
+    open class func deleteAccountMenu(accountId: Int32, menuId: Int32, completion: @escaping ((_ data: DeleteEntry?,_ error: Error?) -> Void)) {
         deleteAccountMenuWithRequestBuilder(accountId: accountId, menuId: menuId).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -85,9 +86,9 @@ open class MenusAPI: APIBase {
 
 
     /**
-     Delete an individual menu
-     - DELETE /accounts/{accountId}/menus/{menuId}
-     - See Account Menus for more info on the properties.
+     Delete an individual menu.
+     - DELETE /accounts/{account_id}/menus/{menu_id}
+     - Delete an individual menu. See Account Menus for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -98,25 +99,25 @@ open class MenusAPI: APIBase {
      - parameter accountId: (path) Account ID 
      - parameter menuId: (path) Menu ID 
 
-     - returns: RequestBuilder<DeleteMenu> 
+     - returns: RequestBuilder<DeleteEntry> 
      */
-    open class func deleteAccountMenuWithRequestBuilder(accountId: Int32, menuId: Int32) -> RequestBuilder<DeleteMenu> {
-        var path = "/accounts/{accountId}/menus/{menuId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{menuId}", with: "\(menuId)", options: .literal, range: nil)
+    open class func deleteAccountMenuWithRequestBuilder(accountId: Int32, menuId: Int32) -> RequestBuilder<DeleteEntry> {
+        var path = "/accounts/{account_id}/menus/{menu_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{menu_id}", with: "\(menuId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
 
 
-        let requestBuilder: RequestBuilder<DeleteMenu>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<DeleteEntry>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-     Show details of an individual menu
+     Show details of an individual menu.
      
      - parameter accountId: (path) Account ID 
      - parameter menuId: (path) Menu ID 
@@ -130,9 +131,9 @@ open class MenusAPI: APIBase {
 
 
     /**
-     Show details of an individual menu
-     - GET /accounts/{accountId}/menus/{menuId}
-     - This service shows the details of an individual Menu.
+     Show details of an individual menu.
+     - GET /accounts/{account_id}/menus/{menu_id}
+     - Show details of an individual menu. See Account Menus for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -140,19 +141,19 @@ open class MenusAPI: APIBase {
   "allow_extension_dial" : true,
   "greeting" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 1
   },
   "timeout_handler" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 5
   },
   "name" : "aeiou",
   "options" : [ {
     "route" : "",
     "key" : "aeiou"
   } ],
-  "id" : 123,
-  "keypress_wait_time" : 123,
+  "id" : 0,
+  "keypress_wait_time" : 6,
   "keypress_error" : ""
 }}]
      
@@ -162,9 +163,9 @@ open class MenusAPI: APIBase {
      - returns: RequestBuilder<MenuFull> 
      */
     open class func getAccountMenuWithRequestBuilder(accountId: Int32, menuId: Int32) -> RequestBuilder<MenuFull> {
-        var path = "/accounts/{accountId}/menus/{menuId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{menuId}", with: "\(menuId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/menus/{menu_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{menu_id}", with: "\(menuId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -177,7 +178,7 @@ open class MenusAPI: APIBase {
     }
 
     /**
-     Get a list of menus for an account
+     Get a list of menus for an account.
      
      - parameter accountId: (path) Account ID 
      - parameter filtersId: (query) ID filter (optional)
@@ -197,16 +198,16 @@ open class MenusAPI: APIBase {
 
 
     /**
-     Get a list of menus for an account
-     - GET /accounts/{accountId}/menus
-     - See Account Menus for more info on the properties.
+     Get a list of menus for an account.
+     - GET /accounts/{account_id}/menus
+     - Get a list of menus for an account. See Account Menus for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "name" : "aeiou",
     "id" : "aeiou"
@@ -219,19 +220,19 @@ open class MenusAPI: APIBase {
     "allow_extension_dial" : true,
     "greeting" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 2
     },
     "timeout_handler" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 7
     },
     "name" : "aeiou",
     "options" : [ {
       "route" : "",
       "key" : "aeiou"
     } ],
-    "id" : 123,
-    "keypress_wait_time" : 123,
+    "id" : 5,
+    "keypress_wait_time" : 5,
     "keypress_error" : ""
   } ]
 }}]
@@ -248,8 +249,8 @@ open class MenusAPI: APIBase {
      - returns: RequestBuilder<ListMenus> 
      */
     open class func listAccountMenusWithRequestBuilder(accountId: Int32, filtersId: [String]? = nil, filtersName: [String]? = nil, sortId: String? = nil, sortName: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListMenus> {
-        var path = "/accounts/{accountId}/menus"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/menus"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -271,7 +272,7 @@ open class MenusAPI: APIBase {
     }
 
     /**
-     Replace an individual menu
+     Replace an individual menu.
      
      - parameter accountId: (path) Account ID 
      - parameter menuId: (path) Menu ID 
@@ -286,9 +287,9 @@ open class MenusAPI: APIBase {
 
 
     /**
-     Replace an individual menu
-     - PUT /accounts/{accountId}/menus/{menuId}
-     - See Account Menus for more info on the properties.
+     Replace an individual menu.
+     - PUT /accounts/{account_id}/menus/{menu_id}
+     - Replace an individual menu. See Account Menus for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -296,19 +297,19 @@ open class MenusAPI: APIBase {
   "allow_extension_dial" : true,
   "greeting" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 1
   },
   "timeout_handler" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 5
   },
   "name" : "aeiou",
   "options" : [ {
     "route" : "",
     "key" : "aeiou"
   } ],
-  "id" : 123,
-  "keypress_wait_time" : 123,
+  "id" : 0,
+  "keypress_wait_time" : 6,
   "keypress_error" : ""
 }}]
      
@@ -319,9 +320,9 @@ open class MenusAPI: APIBase {
      - returns: RequestBuilder<MenuFull> 
      */
     open class func replaceAccountMenuWithRequestBuilder(accountId: Int32, menuId: Int32, data: ReplaceMenuParams? = nil) -> RequestBuilder<MenuFull> {
-        var path = "/accounts/{accountId}/menus/{menuId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{menuId}", with: "\(menuId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/menus/{menu_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{menu_id}", with: "\(menuId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 

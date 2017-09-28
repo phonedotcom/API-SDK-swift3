@@ -9,6 +9,7 @@ import Foundation
 
 
 open class Member: JSONEncodable {
+
     /** Extension that this member refers to. Output is an Extension Summary Object. Input must be an Extension Lookup Object. */
     public var _extension: ExtensionSummary?
     /** Phone number */
@@ -21,6 +22,7 @@ open class Member: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["extension"] = self._extension?.encodeToJSON()
         nillableDictionary["phone_number"] = self.phoneNumber
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

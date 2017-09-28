@@ -10,6 +10,7 @@ import Foundation
 
 /** The Account Summary Object is used to briefly represent an account. It can occur in several places throughout this API. Here are the properties: */
 open class AccountSummary: JSONEncodable {
+
     /** Account ID. Sometimes referred to as \&quot;Voip ID\&quot; or \&quot;voip_id\&quot;. */
     public var id: Int32?
     /** Name on the account. Read-only. */
@@ -22,6 +23,7 @@ open class AccountSummary: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["id"] = self.id?.encodeToJSON()
         nillableDictionary["name"] = self.name
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

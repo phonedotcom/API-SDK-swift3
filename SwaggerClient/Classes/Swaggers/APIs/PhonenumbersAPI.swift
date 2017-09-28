@@ -5,13 +5,14 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
 
 open class PhonenumbersAPI: APIBase {
     /**
-     Add a phone number to an account
+     Add a phone number to an account.
      
      - parameter accountId: (path) Account ID 
      - parameter data: (body) Phone Number data (optional)
@@ -25,9 +26,9 @@ open class PhonenumbersAPI: APIBase {
 
 
     /**
-     Add a phone number to an account
-     - POST /accounts/{accountId}/phone-numbers
-     - See Intro to Account Phone Numbers for more info on the properties to use.
+     Add a phone number to an account.
+     - POST /accounts/{account_id}/phone-numbers
+     - Add a phone number to an account. See Account Phone Numbers for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -38,7 +39,7 @@ open class PhonenumbersAPI: APIBase {
   },
   "route" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 6
   },
   "block_anonymous" : true,
   "caller_id" : {
@@ -47,17 +48,17 @@ open class PhonenumbersAPI: APIBase {
   },
   "name" : "aeiou",
   "phone_number" : "aeiou",
-  "id" : 123,
+  "id" : 0,
   "block_incoming" : true,
   "sms_forwarding" : {
     "extension" : {
-      "extension" : 123,
+      "extension" : 5,
       "name" : "aeiou",
-      "id" : 123
+      "id" : 1
     },
     "application" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     },
     "type" : "aeiou"
   }
@@ -69,8 +70,8 @@ open class PhonenumbersAPI: APIBase {
      - returns: RequestBuilder<PhoneNumberFull> 
      */
     open class func createAccountPhoneNumberWithRequestBuilder(accountId: Int32, data: CreatePhoneNumberParams? = nil) -> RequestBuilder<PhoneNumberFull> {
-        var path = "/accounts/{accountId}/phone-numbers"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/phone-numbers"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 
@@ -83,7 +84,7 @@ open class PhonenumbersAPI: APIBase {
     }
 
     /**
-     Show details of an individual phone number
+     Show details of an individual phone number.
      
      - parameter accountId: (path) Account ID 
      - parameter numberId: (path) Number ID 
@@ -97,9 +98,9 @@ open class PhonenumbersAPI: APIBase {
 
 
     /**
-     Show details of an individual phone number
-     - GET /accounts/{accountId}/phone-numbers/{numberId}
-     - See Intro to Account Phone Numbers for more info on the properties.
+     Show details of an individual phone number.
+     - GET /accounts/{account_id}/phone-numbers/{number_id}
+     - Show details of an individual phone number. See Account Phone Numbers for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -110,7 +111,7 @@ open class PhonenumbersAPI: APIBase {
   },
   "route" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 6
   },
   "block_anonymous" : true,
   "caller_id" : {
@@ -119,17 +120,17 @@ open class PhonenumbersAPI: APIBase {
   },
   "name" : "aeiou",
   "phone_number" : "aeiou",
-  "id" : 123,
+  "id" : 0,
   "block_incoming" : true,
   "sms_forwarding" : {
     "extension" : {
-      "extension" : 123,
+      "extension" : 5,
       "name" : "aeiou",
-      "id" : 123
+      "id" : 1
     },
     "application" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     },
     "type" : "aeiou"
   }
@@ -141,9 +142,9 @@ open class PhonenumbersAPI: APIBase {
      - returns: RequestBuilder<PhoneNumberFull> 
      */
     open class func getAccountPhoneNumberWithRequestBuilder(accountId: Int32, numberId: Int32) -> RequestBuilder<PhoneNumberFull> {
-        var path = "/accounts/{accountId}/phone-numbers/{numberId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{numberId}", with: "\(numberId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/phone-numbers/{number_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{number_id}", with: "\(numberId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -156,7 +157,7 @@ open class PhonenumbersAPI: APIBase {
     }
 
     /**
-     Get a list of phone numbers registered to an account
+     Get a list of phone numbers registered to an account.
      
      - parameter accountId: (path) Account ID 
      - parameter filtersId: (query) ID filter (optional)
@@ -178,16 +179,16 @@ open class PhonenumbersAPI: APIBase {
 
 
     /**
-     Get a list of phone numbers registered to an account
-     - GET /accounts/{accountId}/phone-numbers
-     - See Intro to Account Phone Numbers for more info on the properties.
+     Get a list of phone numbers registered to an account.
+     - GET /accounts/{account_id}/phone-numbers
+     - Get a list of phone numbers registered to an account. See Account Phone Numbers for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "name" : "aeiou",
     "phone_number" : "aeiou",
@@ -205,7 +206,7 @@ open class PhonenumbersAPI: APIBase {
     },
     "route" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     },
     "block_anonymous" : true,
     "caller_id" : {
@@ -214,17 +215,17 @@ open class PhonenumbersAPI: APIBase {
     },
     "name" : "aeiou",
     "phone_number" : "aeiou",
-    "id" : 123,
+    "id" : 5,
     "block_incoming" : true,
     "sms_forwarding" : {
       "extension" : {
-        "extension" : 123,
+        "extension" : 7,
         "name" : "aeiou",
-        "id" : 123
+        "id" : 2
       },
       "application" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 9
       },
       "type" : "aeiou"
     }
@@ -245,8 +246,8 @@ open class PhonenumbersAPI: APIBase {
      - returns: RequestBuilder<ListPhoneNumbers> 
      */
     open class func listAccountPhoneNumbersWithRequestBuilder(accountId: Int32, filtersId: [String]? = nil, filtersName: [String]? = nil, filtersPhoneNumber: [String]? = nil, sortId: String? = nil, sortName: String? = nil, sortPhoneNumber: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListPhoneNumbers> {
-        var path = "/accounts/{accountId}/phone-numbers"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/phone-numbers"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -270,7 +271,7 @@ open class PhonenumbersAPI: APIBase {
     }
 
     /**
-     Update the settings for an existing phone number on your account
+     Update the settings for an existing phone number on your account.
      
      - parameter accountId: (path) Account ID 
      - parameter numberId: (path) Number ID 
@@ -285,9 +286,9 @@ open class PhonenumbersAPI: APIBase {
 
 
     /**
-     Update the settings for an existing phone number on your account
-     - PUT /accounts/{accountId}/phone-numbers/{numberId}
-     - See Intro to Account Phone Numbers for more info on the properties.
+     Update the settings for an existing phone number on your account.
+     - PUT /accounts/{account_id}/phone-numbers/{number_id}
+     - Update the settings for an existing phone number on your account. See Account Phone Numbers for more info on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -298,7 +299,7 @@ open class PhonenumbersAPI: APIBase {
   },
   "route" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 6
   },
   "block_anonymous" : true,
   "caller_id" : {
@@ -307,17 +308,17 @@ open class PhonenumbersAPI: APIBase {
   },
   "name" : "aeiou",
   "phone_number" : "aeiou",
-  "id" : 123,
+  "id" : 0,
   "block_incoming" : true,
   "sms_forwarding" : {
     "extension" : {
-      "extension" : 123,
+      "extension" : 5,
       "name" : "aeiou",
-      "id" : 123
+      "id" : 1
     },
     "application" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     },
     "type" : "aeiou"
   }
@@ -330,9 +331,9 @@ open class PhonenumbersAPI: APIBase {
      - returns: RequestBuilder<PhoneNumberFull> 
      */
     open class func replaceAccountPhoneNumberWithRequestBuilder(accountId: Int32, numberId: Int32, data: ReplacePhoneNumberParams? = nil) -> RequestBuilder<PhoneNumberFull> {
-        var path = "/accounts/{accountId}/phone-numbers/{numberId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{numberId}", with: "\(numberId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/phone-numbers/{number_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{number_id}", with: "\(numberId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 

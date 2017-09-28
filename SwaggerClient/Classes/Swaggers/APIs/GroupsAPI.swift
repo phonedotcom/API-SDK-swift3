@@ -5,17 +5,18 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
 
 open class GroupsAPI: APIBase {
     /**
-     
+     Add a new contact group to an account extension.
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
-     - parameter data: (body) Group name 
+     - parameter data: (body) Group data 
      - parameter completion: completion handler to receive the data and the error objects
      */
     open class func createAccountExtensionContactGroup(accountId: Int32, extensionId: Int32, data: CreateGroupParams, completion: @escaping ((_ data: GroupFull?,_ error: Error?) -> Void)) {
@@ -26,27 +27,27 @@ open class GroupsAPI: APIBase {
 
 
     /**
-     
-     - POST /accounts/{accountId}/extensions/{extensionId}/contact-groups
-     - See Account Contact Groups for more info on the properties.
+     Add a new contact group to an account extension.
+     - POST /accounts/{account_id}/extensions/{extension_id}/contact-groups
+     - Add a new contact group to an account extension. See Account Contact Groups for details on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "name" : "aeiou",
-  "id" : 123
+  "id" : 0
 }}]
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
-     - parameter data: (body) Group name 
+     - parameter data: (body) Group data 
 
      - returns: RequestBuilder<GroupFull> 
      */
     open class func createAccountExtensionContactGroupWithRequestBuilder(accountId: Int32, extensionId: Int32, data: CreateGroupParams) -> RequestBuilder<GroupFull> {
-        var path = "/accounts/{accountId}/extensions/{extensionId}/contact-groups"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{extensionId}", with: "\(extensionId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/extensions/{extension_id}/contact-groups"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{extension_id}", with: "\(extensionId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data.encodeToJSON() as? [String:AnyObject]
 
@@ -59,14 +60,14 @@ open class GroupsAPI: APIBase {
     }
 
     /**
-     Delete an addressbook group
+     Delete a contact group from the address book.
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
      - parameter groupId: (path) Group ID 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func deleteAccountExtensionContactGroup(accountId: Int32, extensionId: Int32, groupId: Int32, completion: @escaping ((_ data: DeleteGroup?,_ error: Error?) -> Void)) {
+    open class func deleteAccountExtensionContactGroup(accountId: Int32, extensionId: Int32, groupId: Int32, completion: @escaping ((_ data: DeleteEntry?,_ error: Error?) -> Void)) {
         deleteAccountExtensionContactGroupWithRequestBuilder(accountId: accountId, extensionId: extensionId, groupId: groupId).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -74,9 +75,9 @@ open class GroupsAPI: APIBase {
 
 
     /**
-     Delete an addressbook group
-     - DELETE /accounts/{accountId}/extensions/{extensionId}/contact-groups/{groupId}
-     - 
+     Delete a contact group from the address book.
+     - DELETE /accounts/{account_id}/extensions/{extension_id}/contact-groups/{group_id}
+     - Delete a contact group from the address book. See Account Contact Groups for details on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
@@ -88,26 +89,26 @@ open class GroupsAPI: APIBase {
      - parameter extensionId: (path) Extension ID 
      - parameter groupId: (path) Group ID 
 
-     - returns: RequestBuilder<DeleteGroup> 
+     - returns: RequestBuilder<DeleteEntry> 
      */
-    open class func deleteAccountExtensionContactGroupWithRequestBuilder(accountId: Int32, extensionId: Int32, groupId: Int32) -> RequestBuilder<DeleteGroup> {
-        var path = "/accounts/{accountId}/extensions/{extensionId}/contact-groups/{groupId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{extensionId}", with: "\(extensionId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{groupId}", with: "\(groupId)", options: .literal, range: nil)
+    open class func deleteAccountExtensionContactGroupWithRequestBuilder(accountId: Int32, extensionId: Int32, groupId: Int32) -> RequestBuilder<DeleteEntry> {
+        var path = "/accounts/{account_id}/extensions/{extension_id}/contact-groups/{group_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{extension_id}", with: "\(extensionId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{group_id}", with: "\(groupId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
 
 
-        let requestBuilder: RequestBuilder<DeleteGroup>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<DeleteEntry>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-     
+     Retrieve the information of a contact group.
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
@@ -122,15 +123,15 @@ open class GroupsAPI: APIBase {
 
 
     /**
-     
-     - GET /accounts/{accountId}/extensions/{extensionId}/contact-groups/{groupId}
-     - See Account Contact Groups for more info on the properties.
+     Retrieve the information of a contact group.
+     - GET /accounts/{account_id}/extensions/{extension_id}/contact-groups/{group_id}
+     - Retrieve the information of a contact group. See Account Contact Groups for details on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "name" : "aeiou",
-  "id" : 123
+  "id" : 0
 }}]
      
      - parameter accountId: (path) Account ID 
@@ -140,10 +141,10 @@ open class GroupsAPI: APIBase {
      - returns: RequestBuilder<GroupFull> 
      */
     open class func getAccountExtensionContactGroupWithRequestBuilder(accountId: Int32, extensionId: Int32, groupId: Int32) -> RequestBuilder<GroupFull> {
-        var path = "/accounts/{accountId}/extensions/{extensionId}/contact-groups/{groupId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{extensionId}", with: "\(extensionId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{groupId}", with: "\(groupId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/extensions/{extension_id}/contact-groups/{group_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{extension_id}", with: "\(extensionId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{group_id}", with: "\(groupId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -156,7 +157,7 @@ open class GroupsAPI: APIBase {
     }
 
     /**
-     Show a list of contact groups belonging to an extension
+     Show a list of contact groups belonging to an extension.
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
@@ -177,16 +178,16 @@ open class GroupsAPI: APIBase {
 
 
     /**
-     Show a list of contact groups belonging to an extension
-     - GET /accounts/{accountId}/extensions/{extensionId}/contact-groups
-     - See Account Contact Groups for details on the properties.
+     Show a list of contact groups belonging to an extension.
+     - GET /accounts/{account_id}/extensions/{extension_id}/contact-groups
+     - Show a list of contact groups belonging to an extension. See Account Contact Groups for details on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "name" : "aeiou",
     "id" : "aeiou"
@@ -197,7 +198,7 @@ open class GroupsAPI: APIBase {
   },
   "items" : [ {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 5
   } ]
 }}]
      
@@ -214,9 +215,9 @@ open class GroupsAPI: APIBase {
      - returns: RequestBuilder<ListGroups> 
      */
     open class func listAccountExtensionContactGroupsWithRequestBuilder(accountId: Int32, extensionId: Int32, filtersId: [String]? = nil, filtersName: [String]? = nil, sortId: String? = nil, sortName: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListGroups> {
-        var path = "/accounts/{accountId}/extensions/{extensionId}/contact-groups"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{extensionId}", with: "\(extensionId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/extensions/{extension_id}/contact-groups"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{extension_id}", with: "\(extensionId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -238,12 +239,12 @@ open class GroupsAPI: APIBase {
     }
 
     /**
-     
+     Update the information of a contact group.
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
      - parameter groupId: (path) Group ID 
-     - parameter data: (body) Group name 
+     - parameter data: (body) Group data 
      - parameter completion: completion handler to receive the data and the error objects
      */
     open class func replaceAccountExtensionContactGroup(accountId: Int32, extensionId: Int32, groupId: Int32, data: CreateGroupParams, completion: @escaping ((_ data: GroupFull?,_ error: Error?) -> Void)) {
@@ -254,29 +255,29 @@ open class GroupsAPI: APIBase {
 
 
     /**
-     
-     - PUT /accounts/{accountId}/extensions/{extensionId}/contact-groups/{groupId}
-     - See Account Contact Groups for more info on the properties.
+     Update the information of a contact group.
+     - PUT /accounts/{account_id}/extensions/{extension_id}/contact-groups/{group_id}
+     - Update the information of a contact group. See Account Contact Groups for details on the properties.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "name" : "aeiou",
-  "id" : 123
+  "id" : 0
 }}]
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
      - parameter groupId: (path) Group ID 
-     - parameter data: (body) Group name 
+     - parameter data: (body) Group data 
 
      - returns: RequestBuilder<GroupFull> 
      */
     open class func replaceAccountExtensionContactGroupWithRequestBuilder(accountId: Int32, extensionId: Int32, groupId: Int32, data: CreateGroupParams) -> RequestBuilder<GroupFull> {
-        var path = "/accounts/{accountId}/extensions/{extensionId}/contact-groups/{groupId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{extensionId}", with: "\(extensionId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{groupId}", with: "\(groupId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/extensions/{extension_id}/contact-groups/{group_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{extension_id}", with: "\(extensionId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{group_id}", with: "\(groupId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data.encodeToJSON() as? [String:AnyObject]
 

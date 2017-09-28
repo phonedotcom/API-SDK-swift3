@@ -9,6 +9,7 @@ import Foundation
 
 
 open class FilterIdDirectionFrom: JSONEncodable {
+
     public var id: String?
     public var direction: String?
     public var from: String?
@@ -21,6 +22,7 @@ open class FilterIdDirectionFrom: JSONEncodable {
         nillableDictionary["id"] = self.id
         nillableDictionary["direction"] = self.direction
         nillableDictionary["from"] = self.from
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

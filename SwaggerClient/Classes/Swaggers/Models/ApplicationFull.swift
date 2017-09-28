@@ -10,6 +10,7 @@ import Foundation
 
 /** The Full Application Object is identical to the Application Summary Object. See above for details. */
 open class ApplicationFull: JSONEncodable {
+
     /** Application ID. Read-only. */
     public var id: Int32?
     /** Application name */
@@ -22,6 +23,7 @@ open class ApplicationFull: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["id"] = self.id?.encodeToJSON()
         nillableDictionary["name"] = self.name
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

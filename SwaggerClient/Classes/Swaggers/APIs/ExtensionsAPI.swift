@@ -5,13 +5,14 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
 
 open class ExtensionsAPI: APIBase {
     /**
-     Create an individual extension
+     Create an individual extension.
      
      - parameter accountId: (path) Account ID 
      - parameter data: (body) Account Extensions Data (optional)
@@ -25,23 +26,23 @@ open class ExtensionsAPI: APIBase {
 
 
     /**
-     Create an individual extension
-     - POST /accounts/{accountId}/extensions
-     - This service shows how to create a virtual extension.
+     Create an individual extension.
+     - POST /accounts/{account_id}/extensions
+     - Create an individual extension. See extension for more details.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "device_membership" : {
-    "line" : 123,
+    "line" : 5,
     "device" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     }
   },
   "local_area_code" : "aeiou",
   "call_notifications" : "",
-  "extension" : 123,
+  "extension" : 6,
   "voicemail" : {
     "password" : "aeiou",
     "attachments" : "aeiou",
@@ -65,16 +66,17 @@ open class ExtensionsAPI: APIBase {
   "enable_outbound_calls" : true,
   "route" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 7
   },
   "name_greeting" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 2
   },
   "usage_type" : "aeiou",
   "caller_id" : "aeiou",
   "name" : "aeiou",
-  "id" : 123
+  "id" : 0,
+  "voip_id" : 1
 }}]
      
      - parameter accountId: (path) Account ID 
@@ -83,8 +85,8 @@ open class ExtensionsAPI: APIBase {
      - returns: RequestBuilder<ExtensionFull> 
      */
     open class func createAccountExtensionWithRequestBuilder(accountId: Int32, data: CreateExtensionParams? = nil) -> RequestBuilder<ExtensionFull> {
-        var path = "/accounts/{accountId}/extensions"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/extensions"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 
@@ -97,7 +99,7 @@ open class ExtensionsAPI: APIBase {
     }
 
     /**
-     Show details of an individual extension
+     Show details of an individual extension.
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
@@ -111,23 +113,23 @@ open class ExtensionsAPI: APIBase {
 
 
     /**
-     Show details of an individual extension
-     - GET /accounts/{accountId}/extensions/{extensionId}
-     - This service shows the details of an individual Extension.
+     Show details of an individual extension.
+     - GET /accounts/{account_id}/extensions/{extension_id}
+     - Show details of an individual extension. See extension for more details.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "device_membership" : {
-    "line" : 123,
+    "line" : 5,
     "device" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     }
   },
   "local_area_code" : "aeiou",
   "call_notifications" : "",
-  "extension" : 123,
+  "extension" : 6,
   "voicemail" : {
     "password" : "aeiou",
     "attachments" : "aeiou",
@@ -151,16 +153,17 @@ open class ExtensionsAPI: APIBase {
   "enable_outbound_calls" : true,
   "route" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 7
   },
   "name_greeting" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 2
   },
   "usage_type" : "aeiou",
   "caller_id" : "aeiou",
   "name" : "aeiou",
-  "id" : 123
+  "id" : 0,
+  "voip_id" : 1
 }}]
      
      - parameter accountId: (path) Account ID 
@@ -169,9 +172,9 @@ open class ExtensionsAPI: APIBase {
      - returns: RequestBuilder<ExtensionFull> 
      */
     open class func getAccountExtensionWithRequestBuilder(accountId: Int32, extensionId: Int32) -> RequestBuilder<ExtensionFull> {
-        var path = "/accounts/{accountId}/extensions/{extensionId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{extensionId}", with: "\(extensionId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/extensions/{extension_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{extension_id}", with: "\(extensionId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -184,7 +187,7 @@ open class ExtensionsAPI: APIBase {
     }
 
     /**
-     Get a list of extensions visible to the authenticated user or client
+     Get a list of extensions visible to the authenticated user or client.
      
      - parameter accountId: (path) Account ID 
      - parameter filtersId: (query) ID filter (optional)
@@ -206,16 +209,16 @@ open class ExtensionsAPI: APIBase {
 
 
     /**
-     Get a list of extensions visible to the authenticated user or client
-     - GET /accounts/{accountId}/extensions
-     - This service lists the visible extensions on a given account.
+     Get a list of extensions visible to the authenticated user or client.
+     - GET /accounts/{account_id}/extensions
+     - Get a list of extensions visible to the authenticated user or client. See extension for more details.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "extension" : "aeiou",
     "name" : "aeiou",
@@ -228,15 +231,15 @@ open class ExtensionsAPI: APIBase {
   },
   "items" : [ {
     "device_membership" : {
-      "line" : 123,
+      "line" : 7,
       "device" : {
         "name" : "aeiou",
-        "id" : 123
+        "id" : 9
       }
     },
     "local_area_code" : "aeiou",
     "call_notifications" : "",
-    "extension" : 123,
+    "extension" : 5,
     "voicemail" : {
       "password" : "aeiou",
       "attachments" : "aeiou",
@@ -260,16 +263,17 @@ open class ExtensionsAPI: APIBase {
     "enable_outbound_calls" : true,
     "route" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 2
     },
     "name_greeting" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 3
     },
     "usage_type" : "aeiou",
     "caller_id" : "aeiou",
     "name" : "aeiou",
-    "id" : 123
+    "id" : 5,
+    "voip_id" : 2
   } ]
 }}]
      
@@ -287,8 +291,8 @@ open class ExtensionsAPI: APIBase {
      - returns: RequestBuilder<ListExtensions> 
      */
     open class func listAccountExtensionsWithRequestBuilder(accountId: Int32, filtersId: [String]? = nil, filtersExtension: [String]? = nil, filtersName: [String]? = nil, sortId: String? = nil, sortExtension: String? = nil, sortName: String? = nil, limit: Int32? = nil, offset: Int32? = nil, fields: String? = nil) -> RequestBuilder<ListExtensions> {
-        var path = "/accounts/{accountId}/extensions"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/extensions"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -312,7 +316,7 @@ open class ExtensionsAPI: APIBase {
     }
 
     /**
-     Replace an individual extension
+     Replace an individual extension.
      
      - parameter accountId: (path) Account ID 
      - parameter extensionId: (path) Extension ID 
@@ -327,23 +331,23 @@ open class ExtensionsAPI: APIBase {
 
 
     /**
-     Replace an individual extension
-     - PUT /accounts/{accountId}/extensions/{extensionId}
-     - This service shows how to update an individual extension.
+     Replace an individual extension.
+     - PUT /accounts/{account_id}/extensions/{extension_id}
+     - Replace an individual extension. See extension for more details.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
   "device_membership" : {
-    "line" : 123,
+    "line" : 5,
     "device" : {
       "name" : "aeiou",
-      "id" : 123
+      "id" : 5
     }
   },
   "local_area_code" : "aeiou",
   "call_notifications" : "",
-  "extension" : 123,
+  "extension" : 6,
   "voicemail" : {
     "password" : "aeiou",
     "attachments" : "aeiou",
@@ -367,16 +371,17 @@ open class ExtensionsAPI: APIBase {
   "enable_outbound_calls" : true,
   "route" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 7
   },
   "name_greeting" : {
     "name" : "aeiou",
-    "id" : 123
+    "id" : 2
   },
   "usage_type" : "aeiou",
   "caller_id" : "aeiou",
   "name" : "aeiou",
-  "id" : 123
+  "id" : 0,
+  "voip_id" : 1
 }}]
      
      - parameter accountId: (path) Account ID 
@@ -386,9 +391,9 @@ open class ExtensionsAPI: APIBase {
      - returns: RequestBuilder<ExtensionFull> 
      */
     open class func replaceAccountExtensionWithRequestBuilder(accountId: Int32, extensionId: Int32, data: ReplaceExtensionParams? = nil) -> RequestBuilder<ExtensionFull> {
-        var path = "/accounts/{accountId}/extensions/{extensionId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{extensionId}", with: "\(extensionId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/extensions/{extension_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{extension_id}", with: "\(extensionId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters = data?.encodeToJSON() as? [String:AnyObject]
 

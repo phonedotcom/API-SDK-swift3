@@ -5,6 +5,7 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
 
 
@@ -26,14 +27,14 @@ open class ExpressservicecodesAPI: APIBase {
 
     /**
      Show details of an account Express Service Code
-     - GET /accounts/{accountId}/express-service-codes/{codeId}
+     - GET /accounts/{account_id}/express-service-codes/{code_id}
      - This service shows the details of an Account Express Service Code.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "expire_date" : 123,
-  "id" : 123,
+  "expire_date" : [ 6 ],
+  "id" : 0,
   "express_service_code" : "aeiou"
 }}]
      
@@ -43,9 +44,9 @@ open class ExpressservicecodesAPI: APIBase {
      - returns: RequestBuilder<ExpressServiceCodeFull> 
      */
     open class func getAccountExpressSrvCodeWithRequestBuilder(accountId: Int32, codeId: Int32) -> RequestBuilder<ExpressServiceCodeFull> {
-        var path = "/accounts/{accountId}/express-service-codes/{codeId}"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{codeId}", with: "\(codeId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/express-service-codes/{code_id}"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{code_id}", with: "\(codeId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 
@@ -58,7 +59,7 @@ open class ExpressservicecodesAPI: APIBase {
     }
 
     /**
-     Get the Express Service Code associated with your account in list format
+     Get the Express Service Code associated with your account in list format.
      
      - parameter accountId: (path) Account ID 
      - parameter filtersId: (query) ID filter (optional)
@@ -72,16 +73,16 @@ open class ExpressservicecodesAPI: APIBase {
 
 
     /**
-     Get the Express Service Code associated with your account in list format
-     - GET /accounts/{accountId}/express-service-codes
-     - See Express Service Codes for more detail.
+     Get the Express Service Code associated with your account in list format.
+     - GET /accounts/{account_id}/express-service-codes
+     - Get the Express Service Code associated with your account in list format. See Express Service Codes for more detail.
      - API Key:
        - type: apiKey Authorization 
        - name: apiKey
      - examples: [{contentType=application/json, example={
-  "total" : 123,
-  "offset" : 123,
-  "limit" : 123,
+  "total" : 0,
+  "offset" : 6,
+  "limit" : 1,
   "filters" : {
     "id" : "aeiou"
   },
@@ -89,8 +90,8 @@ open class ExpressservicecodesAPI: APIBase {
     "id" : "aeiou"
   } ],
   "items" : [ {
-    "expire_date" : 123,
-    "id" : 123,
+    "expire_date" : [ 5 ],
+    "id" : 5,
     "express_service_code" : "aeiou"
   } ]
 }}]
@@ -101,8 +102,8 @@ open class ExpressservicecodesAPI: APIBase {
      - returns: RequestBuilder<ListExpressServiceCodes> 
      */
     open class func listAccountExpressSrvCodesWithRequestBuilder(accountId: Int32, filtersId: [String]? = nil) -> RequestBuilder<ListExpressServiceCodes> {
-        var path = "/accounts/{accountId}/express-service-codes"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        var path = "/accounts/{account_id}/express-service-codes"
+        path = path.replacingOccurrences(of: "{account_id}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
 

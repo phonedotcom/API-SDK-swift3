@@ -9,9 +9,8 @@ import Foundation
 
 
 open class ReplaceExtensionParams: JSONEncodable {
-    /** Voicemail object */
-    public var voicemail: Voicemail?
-    /** Call Notifications object */
+
+    public var voicemail: VoicemailInput?
     public var callNotifications: CallNotifications?
     /** Recording lookup object */
     public var nameGreeting: Any?
@@ -20,21 +19,21 @@ open class ReplaceExtensionParams: JSONEncodable {
     /** Timezone */
     public var timezone: String?
     /** Include in dial-by-name directory */
-    public var includeInDirectory: Bool?
+    public var includeInDirectory: String?
     /** Extension number (required) */
     public var _extension: Int32?
     /** Enable outgoing calls */
-    public var enableOutboundCalls: Bool?
+    public var enableOutboundCalls: String?
     /** Extension type */
     public var usageType: String?
     /** Contact name */
     public var fullName: String?
     /** Enable Call Waiting */
-    public var enableCallWaiting: Bool?
+    public var enableCallWaiting: String?
     /** Caller ID */
     public var callerId: String?
     /** Local area code */
-    public var localAreaCode: Int32?
+    public var localAreaCode: String?
     /** Route object lookup (must belong to this extension) */
     public var route: String?
 
@@ -55,8 +54,9 @@ open class ReplaceExtensionParams: JSONEncodable {
         nillableDictionary["full_name"] = self.fullName
         nillableDictionary["enable_call_waiting"] = self.enableCallWaiting
         nillableDictionary["caller_id"] = self.callerId
-        nillableDictionary["local_area_code"] = self.localAreaCode?.encodeToJSON()
+        nillableDictionary["local_area_code"] = self.localAreaCode
         nillableDictionary["route"] = self.route
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

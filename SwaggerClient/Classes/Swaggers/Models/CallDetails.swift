@@ -10,6 +10,7 @@ import Foundation
 
 /** Each item in the &#39;details&#39; record may contain the following properties: */
 open class CallDetails: JSONEncodable {
+
     /** UNIX time stamp representing the UTC time that this call item starts */
     public var startTime: Int32?
     /** Endpoint for this call item, such as call, voicemail, fax, menu, menu item, queue ... */
@@ -31,6 +32,7 @@ open class CallDetails: JSONEncodable {
         nillableDictionary["id_value"] = self.idValue?.encodeToJSON()
         nillableDictionary["voip_id"] = self.voipId?.encodeToJSON()
         nillableDictionary["voip_phone_id"] = self.voipPhoneId?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }
